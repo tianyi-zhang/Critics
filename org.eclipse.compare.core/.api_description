@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.compare.core_3.5.300.v20130514-1224" version="1.2">
+    <plugin id="org.eclipse.compare.core_3.5.300.v20130514-1224"/>
+    <package name="org.eclipse.compare.patch" visibility="1">
+        <type name="IFilePatch2" restrictions="1"/>
+        <type name="IFilePatchResult" restrictions="1"/>
+        <type name="IHunk" restrictions="1"/>
+        <type name="PatchBuilder" restrictions="6"/>
+        <type name="PatchConfiguration" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.compare.rangedifferencer" visibility="1">
+        <type name="RangeDifference" restrictions="4"/>
+    </package>
+</component>

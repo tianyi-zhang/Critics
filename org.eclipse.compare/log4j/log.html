@@ -1,0 +1,146 @@
+<pre>
+DBG__________________________________________
+[DBG] TREE MATCHING ..
+DBG__________________________________________
+[DBG] QUERY TREE REPRESENTATION
+{(METHOD)(checkSecurity)
+    {(FOREACH_STATEMENT)(String elem`:`users)
+      {(IF_STATEMENT)(security.checkUser(elem))
+        {(THEN_STATEMENT)(security.checkUser(elem))
+          {(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)}
+        }
+      }
+    }
+    {(FOREACH_STATEMENT)(String elem`:`accounts)
+      {(IF_STATEMENT)(security.checkAccount(elem))
+        {(THEN_STATEMENT)(security.checkAccount(elem))
+          {(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)}
+        }
+      }
+    }
+}
+[DBG1] PACKAGE: pkg001, ClassA.java
+[DBG] TID: 1, DEPTH - QUERY: 4, TARGET: 4
+DBG__________________________________________
+QUERY TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(checkSecurity)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`users)' 
+        +---+ '(IF_STATEMENT)(security.checkUser(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkUser(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`accounts)' 
+        +---+ '(IF_STATEMENT)(security.checkAccount(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkAccount(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+DBG__________________________________________
+SUB TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(test01)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`users)' 
+        +---+ '(IF_STATEMENT)(security.checkUser(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkUser(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`accounts)' 
+        +---+ '(IF_STATEMENT)(security.checkAccount(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkAccount(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(VARIABLE_DECLARATION_STATEMENT)(int irrelevantVariable = 0;)' 
+    +---+ '(POSTFIX_EXPRESSION)(irrelevantVariable ++;)' 
+    +---+ '(VARIABLE_DECLARATION_STATEMENT)(String irrelevantString = "";)' 
+    +---+ '(FOR_STATEMENT)((i < irrelevantString.length()))' 
+        +---+ '(METHOD_INVOCATION)(System.out.println(irrelevantString.charAt(irrelevantVariable));)' 
+        +---+ '(FOR_INIT)(int i = 0;)' 
+            +---+ '(VARIABLE_DECLARATION_STATEMENT)(int i = 0;)' 
+        +---+ '(FOR_INCR)(i ++)' 
+            +---+ '(POSTFIX_EXPRESSION)(i ++;)' 
+DBG__________________________________________
+TID: 1, DST: 10.0
+DBG__________________________________________
+[DBG] TID: 2, DEPTH - QUERY: 4, TARGET: 4
+DBG__________________________________________
+QUERY TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(checkSecurity)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`users)' 
+        +---+ '(IF_STATEMENT)(security.checkUser(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkUser(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`accounts)' 
+        +---+ '(IF_STATEMENT)(security.checkAccount(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkAccount(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+DBG__________________________________________
+SUB TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(commentParse)' 
+    +---+ '(WHILE_STATEMENT)(((! this.abort) && (this.index < this.javadocEnd)))' 
+        +---+ '(VARIABLE_DECLARATION_STATEMENT)(int nextCharacter = 0;)' 
+        +---+ '(SWITCH_STATEMENT)(nextCharacter)' 
+            +---+ '(SWITCH_CASE)('@')' 
+            +---+ '(IF_STATEMENT)(((! this.lineStarted) || (previousChar == '[')))' 
+                +---+ '(THEN_STATEMENT)(((! this.lineStarted) || (previousChar == '[')))' 
+        +---+ '(BREAK_STATEMENT)(none)' 
+    +---+ '(RETURN_STATEMENT)(false;)' 
+DBG__________________________________________
+TID: 2, DST: 12.0
+DBG__________________________________________
+[DBG1] PACKAGE: pkg002, SecurityVenerable.java
+[DBG1] PACKAGE: pkg002, ClassB.java
+[DBG] TID: 3, DEPTH - QUERY: 4, TARGET: 4
+DBG__________________________________________
+QUERY TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(checkSecurity)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`users)' 
+        +---+ '(IF_STATEMENT)(security.checkUser(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkUser(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`accounts)' 
+        +---+ '(IF_STATEMENT)(security.checkAccount(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkAccount(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+DBG__________________________________________
+SUB TREE: 
+DBG__________________________________________
+*---+ '(METHOD)(checkSecurity)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`users)' 
+        +---+ '(IF_STATEMENT)(security.checkUser(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkUser(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(FOREACH_STATEMENT)(String elem`:`accounts)' 
+        +---+ '(IF_STATEMENT)(security.checkAccount(elem))' 
+            +---+ '(THEN_STATEMENT)(security.checkAccount(elem))' 
+                +---+ '(ASSIGNMENT)(securityFlag = securityFlag.concat(elem);)' 
+    +---+ '(VARIABLE_DECLARATION_STATEMENT)(int index = securityFlag.indexOf('`:`');)' 
+    +---+ '(VARIABLE_DECLARATION_STATEMENT)(String tokenTmp = securityFlag.substring(0, index);)' 
+    +---+ '(VARIABLE_DECLARATION_STATEMENT)(String token = tokenTmp.trim().replace(",", "");)' 
+    +---+ '(ASSIGNMENT)(securityFlag += securityFlag.intern().concat(token);)' 
+DBG__________________________________________
+TID: 3, DST: 4.0
+DBG__________________________________________
+DBG__________________________________________
+[RST] TREE MATCHING RESULT
+DBG__________________________________________
+TID: 3,    DST: 4.0,  (METHOD)(checkSecurity), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java>/Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java</a>
+TID: 1,    DST: 10.0,    (METHOD)(test01), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+TID: 2,    DST: 12.0,    (METHOD)(commentParse), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+DBG__________________________________________
+TID: 3,    SML: 0.00000,    DST: 4.0,  (METHOD)(checkSecurity), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java>/Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java</a>
+TID: 1,    SML: 0.00000,    DST: 10.0,    (METHOD)(test01), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+TID: 2,    SML: 0.88889,    DST: 12.0,    (METHOD)(commentParse), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+DBG__________________________________________
+TID: 3,    SMV: 0,    SML: 0.00000,    DST: 4.0,  (METHOD)(checkSecurity), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java>/Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java</a>
+TID: 1,    SMV: 12,   SML: 0.00000,    DST: 10.0,    (METHOD)(test01), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+TID: 2,    SMV: 193,  SML: 0.88889,    DST: 12.0,    (METHOD)(commentParse), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+DBG__________________________________________
+TID: 3,    SIM: 0.0,      SML: 0.00000,    SMV: 0,    DST: 4.0,  (METHOD)(checkSecurity), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java>/Users/mksong/runtime-Critics/A2/src/pkg002/ClassB.java</a>
+TID: 1,    SIM: 0.12,     SML: 0.00000,    SMV: 12,   DST: 10.0,    (METHOD)(test01), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+TID: 2,    SIM: 88888.193,    SML: 0.88889,    SMV: 193,  DST: 12.0,    (METHOD)(commentParse), PATH: <a href=file:///Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java>/Users/mksong/runtime-Critics/A2/src/pkg001/ClassA.java</a>
+DBG__________________________________________
+[RST] TIME: 0 min, 0 sec
+[RST] # OF MATCHES: 3
+[RST] # OF CLASSES: 3
+[RST] # OF METHODS: 8
+DBG__________________________________________
+</pre>

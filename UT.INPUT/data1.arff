@@ -1,0 +1,16 @@
+@relation data1
+
+@attribute VALUE numeric
+
+@data
+1
+1
+1
+2
+53
+55
+100
+102
+1000
+1050
+10001

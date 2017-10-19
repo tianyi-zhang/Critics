@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.team.core_3.7.0.v20130514-1224" version="1.2">
+    <plugin id="org.eclipse.team.core_3.7.0.v20130514-1224"/>
+    <package name="org.eclipse.team.core" visibility="1">
+        <type name="ICache" restrictions="1"/>
+        <type name="IFileContentManager" restrictions="1"/>
+        <type name="IFileTypeInfo" restrictions="1"/>
+        <type name="IIgnoreInfo" restrictions="1"/>
+        <type name="IStringMapping" restrictions="1"/>
+        <type name="Team" restrictions="0">
+            <method name="getBundleImporters" restrictions="8" signature="()[Lorg/eclipse/team/core/importing/provisional/IBundleImporter;"/>
+        </type>
+    </package>
+    <package name="org.eclipse.team.core.diff" visibility="1">
+        <type name="IDiff" restrictions="1"/>
+        <type name="IDiffChangeEvent" restrictions="1"/>
+        <type name="IDiffTree" restrictions="1"/>
+        <type name="IThreeWayDiff" restrictions="1"/>
+        <type name="ITwoWayDiff" restrictions="1"/>
+    </package>
+    <package name="org.eclipse.team.core.diff.provider" visibility="1">
+        <type name="DiffTree" restrictions="2"/>
+        <type name="ThreeWayDiff" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.team.core.history" visibility="1">
+        <type name="IFileHistory" restrictions="1"/>
+        <type name="IFileHistoryProvider" restrictions="1"/>
+        <type name="IFileRevision" restrictions="1"/>
+    </package>
+    <package name="org.eclipse.team.core.mapping" visibility="1">
+        <type name="IMergeContext" restrictions="1"/>
+        <type name="IMergeStatus" restrictions="1"/>
+        <type name="IResourceDiff" restrictions="1"/>
+        <type name="IResourceDiffTree" restrictions="1"/>
+        <type name="IResourceMappingMerger" restrictions="1"/>
+        <type name="ISynchronizationContext" restrictions="1"/>
+        <type name="ISynchronizationScope" restrictions="1"/>
+        <type name="ISynchronizationScopeManager" restrictions="1"/>
+    </package>
+    <package name="org.eclipse.team.core.mapping.provider" visibility="1">
+        <type name="ResourceDiffTree" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.team.core.subscribers" visibility="1">
+        <type name="ISubscriberChangeEvent" restrictions="1"/>
+    </package>
+    <package name="org.eclipse.team.core.synchronize" visibility="1">
+        <type name="SyncInfoSet" restrictions="0">
+            <method name="getChangeEvent" restrictions="16" signature="()Lorg/eclipse/team/core/synchronize/SyncInfoSetChangeEvent;"/>
+        </type>
+    </package>
+    <package name="org.eclipse.team.core.variants" visibility="1">
+        <type name="CachedResourceVariant" restrictions="0">
+            <method name="cacheHandle" restrictions="16" signature="()V"/>
+            <method name="getCachedHandle" restrictions="16" signature="()Lorg/eclipse/team/core/variants/CachedResourceVariant;"/>
+            <method name="isHandleCached" restrictions="16" signature="()Z"/>
+        </type>
+        <type name="IResourceVariantTree" restrictions="1"/>
+        <type name="PersistantResourceVariantByteStore" restrictions="2"/>
+        <type name="SessionResourceVariantByteStore" restrictions="2"/>
+    </package>
+</component>

@@ -1,0 +1,102 @@
+[?1049h[1;75r(B[m[4l[?7h[39;49m[?1h=[39;49m(B[m[H[2J[?1034h[75;1H[?1049l[?1l> --*- multitail 5.2.13 (C) 2003-2013 by folkert@vanheusden.com -*--
+
+multitail [-cs|-Cs|-c-] [-i] inputfile [-i anotherinputfile] [...]
+-i x	the following parameter is a filename (in case it starts with a dash)
+-I x	like -i only this one merges this logfile into the previous window
+-l x	parameter is a command to be executed
+-L x	see -l but add to the previous window
+-j	read from stdin (can be used (of course) only once)
+-J      like -j but merge into previous window
+--listen [interface]:port behave like a syslog server. port is normally 514
+--Listen [interface]:port like --listen but merge into previous window
+-r interval    restart the command when it died after `interval' seconds
+-R interval    same as -r, only with this one only the difference is displayed
+-Rc/-rc interval  like -r/-R but clean the window before each iteration
+--cont         reconnect lines with a '' at the end
+--mergeall     merge all of the following files into the same window (in the previous window)
+--mergeall-new merge all of the following files into the same window (in a new window)
+--no-mergeall  stop merging all files into one window
+--no-repeat    suppress repeating lines and replace them with a "last message repeated x times"
+--mark-interval x	when nothing comes in, print a '---mark---' line every 'x' seconds
+--mark-change	when multiple files are merged an multitail switches between two windows, print a markerline with the filename
+--no-mark-change	do NOT print the markerline when the file changes (overrides the configfile)
+-n x	initial number of lines to tail
+-m x	set scrollback buffer size (# lines)
+-mb x   set scrollback buffer size (in bytes, use xKB/MB/GB)
+-bw a/f what to buffer: 'a'll or what went through the 'f'ilter
+-a x	like 'tee': write (filtered) input to file 'x'
+-A x	see -a: but write the unfiltered(!) input to file 'x'
+-g x	redirect the input also (filtered) to command/process 'x'
+-G x	redirect the unfiltered input also  to command/process 'x'
+--label x	put in front of each line
+-q i path       check every 'i' seconds for new files in 'path', create a new window for those
+-Q i path       check every 'i' seconds for new files in 'path', put them all in the same window (using subwindows)
+--closeidle x   close windows when more then 'x' seconds no new data was processed
+--new-only	(for -q/-Q) only create windows for files created after multitail was started
+-s x	vertical split screen (in 'x' columns)
+-sw x,x,...	at what columns to split the screen, use '0' for automatic size
+-sn x,x,...     number of windows per column
+-wh x	height of window
+-S	prepend merged output with subwindow-number
+-f	follow the following filename, not the descriptor
+--follow-all	for all files after this switch; follow the filename instead of the descriptor
+--retry	keep trying to open the following file if it is inaccessible
+--retry-all like --retry but for all following files
+-fr scheme  use the predefined filter from the configfile
+-e[m]	print only when matching with this regexp
+-ev	print only when NOT matching with this regexp
+-ec	use regular expression but display the matches inverted on following file
+-eC	use regexp, display everything but matches inverted on following file
+-ex	execute command ('-ex regexp command') when matches, matching line is given as commandline parameter
+-eX     like -ex but only give the matching substring as commandline parameter to the command
+-E	use regular expression on following files
+-Ec	use regular expression but display the matches inverted on following files
+-EC	use regexp, display everything but matches inverted on following files
+-ke x   strip parts of the input using regular expression 'x'
+-kr x y strip parts of the input starting at offset x and ending (not including!) offset y
+-kc x y strip parts of the input: strip column 'y' with delimiter 'x'
+-ks x   use edit scheme 'x' (defined in configfile)
+-kS x   only show the substrings matched by the substring-selects (the parts between '(' and ')') in the regular epxression 'x'
+-v      invert next regular expression (do not use with -ev/em)
+-cv x	use conversion scheme 'x' (see multitail.conf)
+-c	colorize current
+-cS scheme	use colorscheme 'scheme' (as defined in multitail.conf)
+-csn    extra switch for the following switches; do not use reverse (inverted) colors
+-Cs	colorize all following files with syslog-scheme
+-C	colorize all following files
+-Cf/-cf field delimiter		colorize next/all file(s) depending on the given field number. fields are delimited with the given field-delimiter
+-ci color  use 'color' (red, green, etc), usefull when merging multiple inputs
+-c-	do NOT colorize the following file
+-C-	do NOT colorize the following files
+-cT term	interpret terminal-codes from file/command (for terminal type 'term')
+-Z color   set color for markerline
+-ts	add a timestamp (format configurable in multitail.conf) before each line
+-T      put a timestamp in markerlines
+-d	do NOT update the status-line
+-D	do not display a status-line at all
+-du     put the statusline above the data window
+-z	do not "window closed" windows
+-w	do not use colors
+-u	set update interval (for slow links)
+-p x [y]	set linewrap (l=left/a=all/r=right/s=syslog,S=syslog w/o procname,o=offset -> 'y',w=wordwrap)
+-P      like -p but for all following files
+-b n	set TAB-width
+--basename	only display the filename (and not the path) in the statusline
+-x str	switch on the xtermtitlebar stuff
+-F file   use 'file' as configfile (instead of /etc/multitail.conf)
+--no-load-global-config do not read /etc/multitail.conf
+-o configfileparameter    do a setting which would normally be set in the configfile
+-H x	show heartbeat (to keep your sessions alive)
+-iw file i	check every 'i' seconds if 'file' appeared in the filesystem
+-t x	display 'x' in the window-title (when MultiTail runs in an xterm)
+--beep-interval x	beep every x lines processed
+--bi x	like '--beep-interval' but only for current (sub-)window
+-V	show version and exit
+-h	this help
+
+You can have multiple regular expressions per file/command. Be warned: if
+you define multiple and one of them is specified with '-E' (=for every
+following file), _all_ of the current regular expressions are for all
+following files!
+
+For help at any time press F1.

@@ -1,0 +1,14 @@
+@relation dataSimScoreJdtCore
+
+@attribute DATA numeric
+
+@data
+0.369
+9090.375
+9090.466
+45454.247
+45454.276
+54545.295
+54545.295
+81818.279
+81818.279

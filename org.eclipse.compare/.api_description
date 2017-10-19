@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.compare_3.5.400.v20130514-1224" version="1.2">
+    <plugin id="org.eclipse.compare_3.5.400.v20130514-1224"/>
+    <package name="org.eclipse.compare" visibility="1">
+        <type name="CompareEditorInput" restrictions="0">
+            <method name="createContentViewerSwitchingPane" restrictions="24" signature="(Lorg/eclipse/compare/Splitter;ILorg/eclipse/compare/CompareEditorInput;)Lorg/eclipse/compare/CompareViewerSwitchingPane;"/>
+            <method name="flushLeftViewers" restrictions="8" signature="(Lorg/eclipse/core/runtime/IProgressMonitor;)V"/>
+            <method name="flushRightViewers" restrictions="8" signature="(Lorg/eclipse/core/runtime/IProgressMonitor;)V"/>
+            <method name="getContentViewerDescriptor" restrictions="24" signature="()Lorg/eclipse/compare/internal/ViewerDescriptor;"/>
+            <method name="getStructureViewerDescriptor" restrictions="24" signature="()Lorg/eclipse/compare/internal/ViewerDescriptor;"/>
+            <method name="isLeftSaveNeeded" restrictions="8" signature="()Z"/>
+            <method name="isRightSaveNeeded" restrictions="8" signature="()Z"/>
+            <method name="setContentViewerDescriptor" restrictions="24" signature="(Lorg/eclipse/compare/internal/ViewerDescriptor;)V"/>
+            <method name="setFocus" restrictions="8" signature="()V"/>
+            <method name="setFocus2" restrictions="8" signature="()Z"/>
+            <method name="setLeftDirty" restrictions="24" signature="(Z)V"/>
+            <method name="setRightDirty" restrictions="24" signature="(Z)V"/>
+            <method name="setStructureViewerDescriptor" restrictions="24" signature="(Lorg/eclipse/compare/internal/ViewerDescriptor;)V"/>
+        </type>
+        <type name="CompareUI" restrictions="4">
+            <method name="addStructureViewerAlias" restrictions="8" signature="(Ljava/lang/String;Ljava/lang/String;)V"/>
+            <method name="removeAllStructureViewerAliases" restrictions="8" signature="(Ljava/lang/String;)V"/>
+        </type>
+        <type name="CompareViewerPane" restrictions="0">
+            <method name="createTopLeft" restrictions="24" signature="(Lorg/eclipse/swt/widgets/Composite;)Lorg/eclipse/swt/widgets/Control;"/>
+        </type>
+        <type name="CompareViewerSwitchingPane" restrictions="0">
+            <method name="getTitleArgument" restrictions="24" signature="()Ljava/lang/String;"/>
+            <method name="inputChanged" restrictions="24" signature="(Ljava/lang/Object;)Z"/>
+            <method name="setTitleArgument" restrictions="24" signature="(Ljava/lang/String;)V"/>
+        </type>
+        <type name="EditionSelectionDialog" restrictions="2"/>
+        <type name="HistoryItem" restrictions="2"/>
+        <type name="ISharedDocumentAdapter" restrictions="1"/>
+        <type name="NavigationAction" restrictions="2"/>
+        <type name="ResourceNode" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.compare.contentmergeviewer" visibility="1">
+        <type name="ContentMergeViewer" restrictions="0">
+            <method name="flushLeft" restrictions="8" signature="(Lorg/eclipse/core/runtime/IProgressMonitor;)V"/>
+            <method name="flushRight" restrictions="8" signature="(Lorg/eclipse/core/runtime/IProgressMonitor;)V"/>
+            <method name="internalIsLeftDirty" restrictions="8" signature="()Z"/>
+            <method name="internalIsRightDirty" restrictions="8" signature="()Z"/>
+        </type>
+    </package>
+    <package name="org.eclipse.compare.patch" visibility="1">
+        <type name="IFilePatch" restrictions="1"/>
+        <type name="WorkspacePatcherUI" restrictions="6"/>
+    </package>
+    <package name="org.eclipse.compare.structuremergeviewer" visibility="1">
+        <type name="DiffTreeViewer" restrictions="2"/>
+        <type name="Differencer" restrictions="0">
+            <method name="contentsEqual" restrictions="8" signature="(Ljava/lang/Object;CLjava/lang/Object;C)Z"/>
+        </type>
+        <type name="StructureCreator" restrictions="0">
+            <method name="contentsEquals" restrictions="8" signature="(Ljava/lang/Object;CLjava/lang/Object;CZ[Lorg/eclipse/compare/ICompareFilter;)Z"/>
+        </type>
+        <type name="StructureDiffViewer" restrictions="2"/>
+    </package>
+</component>

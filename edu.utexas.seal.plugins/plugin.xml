@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Example Category"
+            id="com.plugin.extendedview">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <!--
+   ======================================================  
+   		Critics menu
+   ======================================================
+   --> 
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="criticsMenu"
+               label="Critics">
+<!--
+            <command
+                  commandId="org.eclipse.jdt.ui.commands.Critics"
+                  label="Compare With Local File History in Java Editor"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.compare.commands.Critics"
+                  label="Compare With Local File History in Compare Editor"
+                  style="push">
+            </command>
+            <separator
+                  name="org.eclipse.jdt.ui.separator1">
+            </separator>
+            <command
+                  commandId="org.eclipse.jdt.ui.commands.CriticsEnable"
+                  label="Auto Selection"
+                  style="toggle">
+            </command>
+            <command
+                  commandId="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
+                  label="Generate Diff Templates From Files"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
+                  label="Begin/Generate Diff Templates From Selected Code Blocks"
+                  style="push">
+            </command>
+			<command
+                  commandId="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
+                  label="Recur/Generate Diff Templates From Selected Code Blocks"
+                  style="push">
+            </command>
+			<command
+                  commandId="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+                  label="Match Tree Edit Distance With Selected Code Block"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.utexas.seal.plugins.CriticsInteractiveContextSelectionRunner"
+                  label="Test Interactive Context Selection View"
+                  style="push">
+            </command>
+-->
+            <command
+                  commandId="edu.utexas.seal.plugins.handler.CriticsSelectContext"
+                  label="Select Context Nodes - Method Level"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.utexas.seal.plugins.handler.CriticsFindContext"
+                  label="Find Context Group"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.utexas.seal.plugins.handler.CriticsSelectContextClassLevel"
+                  label="Select Context Nodes - Class Level"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            sequence="Command+`"
+            commandId="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window">
+      </key>
+      <key
+            commandId="edu.utexas.seal.plugins.handler.CriticsSelectContext"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Alt+1">
+      </key>
+      <key
+            commandId="edu.utexas.seal.plugins.handler.CriticsFindContext"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Alt+2">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="edu.utexas.seal.plugins.objectContribution1"
+            objectClass="edu.utexas.seal.plugins.Object1">
+         <menu
+               id="edu.utexas.seal.plugins.menu1"
+               label="My Label">
+         </menu>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="edu.utexas.seal.plugin.preprocess.UTCriticsPreprocessor"></startup>
+   </extension>
+
+</plugin>
