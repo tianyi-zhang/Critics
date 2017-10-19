@@ -8,10 +8,11 @@ Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/platfo
  urces";tag="I20130521-2000";commitId=b7c8b94cc7d9b5d345adbb10342d624f
  1b905473
 Bundle-Activator: org.eclipse.core.resources.ResourcesPlugin
-Require-Bundle: org.eclipse.ant.core;bundle-version="[3.1.0,4.0.0)";re
- solution:=optional,org.eclipse.core.expressions;bundle-version="[3.2.
- 0,4.0.0)",org.eclipse.core.filesystem;bundle-version="[1.3.0,2.0.0)",
- org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)"
+Require-Bundle: org.eclipse.ant.core;bundle-version="[3.1.0,4.0.0)";resolution:=optional,
+ org.eclipse.core.expressions;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.core.filesystem;bundle-version="[1.3.0,2.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
+ org.eclipse.core.expressions.source;bundle-version="3.4.400"
 Bundle-Version: 3.8.100.v20130521-2026
 Export-Package: org.eclipse.core.internal.dtree;x-internal:=true,org.e
  clipse.core.internal.events;x-internal:=true,org.eclipse.core.interna

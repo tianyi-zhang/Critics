@@ -7,12 +7,12 @@ Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/platfo
  rm/eclipse.platform.ui.git;path="bundles/org.eclipse.ui";tag="I201305
  22-1320";commitId=e0ac33b9effcd882700d032de6c48c903623c8da
 Bundle-Activator: org.eclipse.ui.internal.UIPlugin
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)
- ",org.eclipse.swt;bundle-version="[3.101.0,4.0.0)";visibility:=reexpo
- rt,org.eclipse.jface;bundle-version="[3.9.0,4.0.0)";visibility:=reexp
- ort,org.eclipse.ui.workbench;bundle-version="[3.105.0,4.0.0)";visibil
- ity:=reexport,org.eclipse.core.expressions;bundle-version="[3.4.0,4.0
- .0)"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.swt;bundle-version="[3.101.0,4.0.0)";visibility:=reexport,
+ org.eclipse.jface;bundle-version="[3.9.0,4.0.0)";visibility:=reexport,
+ org.eclipse.ui.workbench;bundle-version="[3.105.0,4.0.0)";visibility:=reexport,
+ org.eclipse.core.expressions;bundle-version="[3.4.0,4.0.0)",
+ org.eclipse.core.expressions.source;bundle-version="3.4.400"
 Bundle-Version: 3.105.0.v20130522-1122
 Export-Package: org.eclipse.ui.internal;x-internal:=true
 Build-Jdk: 1.7.0_11

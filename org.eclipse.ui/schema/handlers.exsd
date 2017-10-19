@@ -27,7 +27,7 @@ These conditions are used to avoid unnecessary plug-in loading.  These handler d
       </documentation>
    </annotation>
 
-   <include schemaLocation="schema://org.eclipse.core.expressions/schema/expressionLanguage.exsd"/>
+   <include schemaLocation="schema://org.eclipse.core.expressions.source/schema/expressionLanguage.exsd"/>
 
    <element name="extension">
       <complexType>

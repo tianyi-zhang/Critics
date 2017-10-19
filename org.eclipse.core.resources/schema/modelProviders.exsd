@@ -10,7 +10,7 @@
       </documentation>
    </annotation>
 
-   <include schemaLocation="schema://org.eclipse.core.expressions/schema/expressionLanguage.exsd"/>
+   <include schemaLocation="schema://org.eclipse.core.expressions.source/schema/expressionLanguage.exsd"/>
 
    <element name="extension">
       <annotation>
