@@ -1,7 +1,10 @@
 # Critics
 
 ## Set up Critics
-1. Check out our code: git clone https://github.com/tianyi-zhang/Critics.git
+1. Check out our code
+```bash
+git clone https://github.com/tianyi-zhang/Critics.git
+```
 2. Import all the following eight projects into your Eclipse workspace as Java projects.
 	- edu.cmu.cs.crystal includes the source code of the program analysis framework.
 	- edu.utexas.seal.plugins includes the source code of the Critics plugin.
