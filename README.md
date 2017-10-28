@@ -53,6 +53,22 @@ git clone https://github.com/tianyi-zhang/Critics.git
 
 ![rearrange_critics_views](tutorial/rearrange_view.png?raw=true)
 
-5. Run Critics with sample data
+5. Test Critics with the evaluation dataset
+	- Download the [evaluation dataset](https://www.dropbox.com/s/p2ikyu3iwm7lfww/DataSet.zip?dl=0). The evaluation dataset includes 7 diff patches from Eclipse JDT and SWT. Each diff patch include two Eclipse JDT/SWT revisions. Note that Eclipse SWT includes multiple Java projects, including GTK, MOTIF, PHOTON, WIN, CARBON.
+
+| Patch ID |        Revisions    | Size(LOC) | Change Description |
+|:--------:|:-------------------:|----------:|--------------------|
+| Patch 1  | JDT 9800 vs. 9801   |       190 |initialize a variable in a for loop instead of using a hashmap|
+| Patch 2  | JDT 10610 vs. 10611 |       680 |extract the logic of unicode traitement to a method|
+| Patch 3  | JDT 10640 vs. 10641 |       680 |extract the logic of unicode traitement to a method|
+| Patch 4  | SWT 14344 vs. 14345 |       621 |removing a switch statement and its body|
+| Patch 5  | SWT 13515 vs. 13516 |       450 |refactor the local variable for ExpandItem object to a field|
+| Patch 6  | SWT 14502 vs. 14503 |       484 |add a statement to assign this to the field, dndWidget  of a typedListener object|
+| Patch 7  | SWT 16738 vs. 16739 |       216 |refactor the way to get the region of selected text by first getting a start index instead of 0|
+
+	- Pick one patch and **copy the projects into the workspace of the launched Eclipse application**. Make sure you do this first, otherwise Critics will not be able to find the selected changes.
+	- Import these projects into the workspace of the launched Eclipse application. Ignore any compilation errors in the imported projects.
+	- Select two Java project revisions and right click **Compare With > Each Other**. You can also compare corresponding Java files in two revisions.
+	- In the compare view, 
 
 ## Deploy Critics
