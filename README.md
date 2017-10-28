@@ -64,28 +64,28 @@ git clone https://github.com/tianyi-zhang/Critics.git
 
 ## Evaluation Dataset
 
-Download the [evaluation dataset](https://www.dropbox.com/s/p2ikyu3iwm7lfww/DataSet.zip?dl=0). The evaluation dataset includes 7 diff patches from Eclipse JDT and SWT. Each diff patch include two Eclipse JDT/SWT revisions. Note that Eclipse SWT includes multiple Java projects, including GTK, MOTIF, PHOTON, WIN, CARBON.
+Download the [evaluation dataset](https://www.dropbox.com/s/p2ikyu3iwm7lfww/DataSet.zip?dl=0). The evaluation dataset includes 7 diff patches from Eclipse JDT and SWT. Each diff patch includes two Eclipse JDT/SWT revisions. Note that Eclipse SWT contains multiple Java projects, including GTK, MOTIF, PHOTON, WIN, CARBON.
 
-| ID |      Revision       | Size (LOC)| Change Description |
-|:--:|:-------------------:|----------:|--------------------|
-| 1  | JDT 9800 vs. 9801   |       190 |initialize a variable in a for loop instead of using a hashmap|
-| 2  | JDT 10610 vs. 10611 |       680 |extract the logic of unicode traitement to a method|
-| 3  | JDT 10640 vs. 10641 |       680 |extract the logic of unicode traitement to a method|
-| 4  | SWT 14344 vs. 14345 |       621 |removing a switch statement and its body|
-| 5  | SWT 13515 vs. 13516 |       450 |refactor the local variable for ExpandItem object to a field|
-| 6  | SWT 14502 vs. 14503 |       484 |add a statement to assign this to the field, dndWidget  of a typedListener object|
-| 7  | SWT 16738 vs. 16739 |       216 |refactor the way to get the region of selected text by first getting a start index instead of 0|
+| ID |      Revision       | Size (LOC) | Change Description |
+|:--:|:-------------------:|-----------:|--------------------|
+| 1  | JDT 9800 vs. 9801   |       190  | initialize a variable in a for loop instead of using a hashmap |
+| 2  | JDT 10610 vs. 10611 |       680  | extract the logic of unicode traitement to a method |
+| 3  | JDT 10640 vs. 10641 |       680  | extract the logic of unicode traitement to a method |
+| 4  | SWT 14344 vs. 14345 |       621  | removing a switch statement and its body |
+| 5  | SWT 13515 vs. 13516 |       450  | refactor the local variable for ExpandItem object to a field |
+| 6  | SWT 14502 vs. 14503 |       484  | add a statement to assign this to the field, dndWidget of a typedListener object |
+| 7  | SWT 16738 vs. 16739 |       216  | refactor the way to get the region of selected text by first getting a start index instead of 0 |
 
 ## Investigate Diff Patches with Critics 
 
 **Note:** You can also watch a [demo video](https://www.youtube.com/watch?v=F2D7t_Z5rhk).
 
 1. Import a patch into your Eclipse workspace. 
-	- Make sure you **copy the projects in a patch into the workspace of the launched Eclipse application** first. Otherwise Critics will not be able to find the selected changes.
-	- Import the project revisions in the selected patch into the workspace of the launched Eclipse application. Ignore any compilation errors in the imported projects.
+	- Make sure you **copy the projects in a patch into the workspace of the launched Eclipse application** first. Otherwise Critics will not be able to find Java files in the patch.
+	- Import the projects in the selected patch into the workspace of the launched Eclipse application. Ignore any compilation errors in the imported projects.
 
 2. Select a program change. 
-	- Select two Java project revisions and right click **Compare With > Each Other**. You can also compare corresponding Java files in two revisions.
+	- Select two project revisions and right click **Compare With > Each Other**. You can also compare corresponding Java files in two revisions.
 	- In the side-by-side diff view, select a change, right click, and choose **Select Diff Region**.
 
 ![compare_visualize_edits](tutorial/compare_visualize.png?raw=true)
