@@ -37,16 +37,22 @@ git clone https://github.com/tianyi-zhang/Critics.git
 	- A new Eclipse Application launch configuration can be created by double-clicking on the **Eclipse Application** node in the tree viewer to the left.
 	- Change the Eclipse Application configuration name and the workspace as preferred.
 	- Click **Run**.
+
 ![run_configuration](tutorial/run_configuration.png?raw=true)
+
 3. Add Critics views to the current perspective
-	- Click Windows > Show View -> Other
+	- Click **Windows > Show View -> Other**.
 	- Find and add **Diff Template View (New Rev.)**,  **Diff Template View (Old Rev.)**, and **Matching Result**.
-		- "Diff Template View (New Rev.)" shows the visualized abstract syntax tree of the new revision of the selected edits.
-		- "Diff Template View (Old Rev.)" shows the visualized abstract syntax tree of the old revision of the selected edits.
-		- "Matching Result" shows the correct edits that match the selected edits as well as the missing/inconsistent edits.
+		- **Diff Template View (New Rev.)** shows the visualized abstract syntax tree of the new revision of the selected edits.
+		- **Diff Template View (Old Rev.)** shows the visualized abstract syntax tree of the old revision of the selected edits.
+		- **Matching Result** shows the correct edits that match the selected edits as well as the missing/inconsistent edits.
+
 ![add_critics_views](tutorial/add_view.png?raw=true)
+
 4. Re-arrange the added views as preferred
+
 ![rearrange_critics_views](tutorial/rearrange_view.png?raw=true)
+
 5. Run Critics with sample data
 
 ## Deploy Critics
