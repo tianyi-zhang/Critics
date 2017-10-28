@@ -15,7 +15,7 @@ git clone https://github.com/tianyi-zhang/Critics.git
 	- UT.INPUT includes the resource files such as icon images of Critics.
 	- UT.CONFIG includes the configuration file.
 3. Install Subclipse ([instruction](http://web.mit.edu/6.005/www/fa10/labs/procedural_java/subclipse.html)) 
-4. Install GEF Zest 
+4. Install GEF Zest
 	- Copy all jar files in the gef-zest folder into your Eclipse plugins folder, e.g., /home/troy/eclipse-J2EE/plugins.
 	- Restart your Eclipse with the clean option by adding "-clean" in the first line of the eclipse.ini file.
 	- Remember to remove the added line after restarting the Eclipse.
@@ -32,5 +32,21 @@ git clone https://github.com/tianyi-zhang/Critics.git
 
 ## Run/Debug Critics
 1. Update all paths in the configuration file, config.txt in UT.CONFIG.
+2. Launch a separate Eclipse application
+	- Click **Run > Run Configuration**.
+	- A new Eclipse Application launch configuration can be created by double-clicking on the **Eclipse Application** node in the tree viewer to the left.
+	- Change the Eclipse Application configuration name and the workspace as preferred.
+	- Click **Run**.
+![run_configuration](tutorial/run_configuration.png?raw=true)
+3. Add Critics views to the current perspective
+	- Click Windows > Show View -> Other
+	- Find and add **Diff Template View (New Rev.)**,  **Diff Template View (Old Rev.)**, and **Matching Result**.
+		- "Diff Template View (New Rev.)" shows the visualized abstract syntax tree of the new revision of the selected edits.
+		- "Diff Template View (Old Rev.)" shows the visualized abstract syntax tree of the old revision of the selected edits.
+		- "Matching Result" shows the correct edits that match the selected edits as well as the missing/inconsistent edits.
+![add_critics_views](tutorial/add_view.png?raw=true)
+4. Re-arrange the added views as preferred
+![rearrange_critics_views](tutorial/rearrange_view.png?raw=true)
+5. Run Critics with sample data
 
 ## Deploy Critics
