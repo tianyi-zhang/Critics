@@ -96,6 +96,8 @@ Critics identifies unchanged program statements that are dependent to the select
 	- **Generalize Variables.** Right click a tree node in the visualized change template, select **Generalize**, and then click a variable you want to generalize. Once a variable name is  generalized, it can be matched to any other variables. You can also right click a blank area in **Diff Template View**, select **Generalize > Open Generalization Dialog**, and generalize multiple variables at once.
 	- **Exclude/Include Statements.** You can exclude a tree node by double clicking it. The excluded node will not be used when searching for similar changes. You can double click an excluded node to include it again. 
 
-4. Right click and select **Summarize Changes and Detect Anomalies**. 
+4. Right click and select **Summarize Changes and Detect Anomalies**. All similar edits and anomalies are displayed in **Matching Results View**. If you want to view the source code of each change, you can double click an entry in the list, it will jump to the source code location of the change.
+
+![summarize_similar_edits_and_detect_anomalies](tutorial/search_results.png?raw=true)
 
 
