@@ -57,6 +57,13 @@
             id="edu.utexas.seal.plugins.overlay.TestCriticsOverlayView2"
             name="TestCriticsOverlayView2">
       </view>
+      <view
+            class="edu.utexas.seal.plugins.overlay.view.CriticsOverlaySearchPredicate"
+            icon="icons/cat.png"
+            id="edu.utexas.seal.plugins.overlay.view.CriticsOverlaySearchPredicate"
+            name="Predicate View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -261,6 +268,13 @@
                   name="compareWithGroup">
             </separator>
          </menu>
+         <menu
+               id="searchMenu"
+               label="Search">
+            <separator
+                  name="searchwithgroup">
+            </separator>
+         </menu>
       </objectContribution>
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"
@@ -337,6 +351,18 @@
                menubarPath="replaceWithMenu"
                enablesFor="1"
                id="addFromHistoryAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.compare.internal.ConvertToFactAction"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="org.eclipse.compare.internal.ConvertToFactAction"
+               enablesFor="1"
+               id="convertToFacts"
+               label="Convert To Facts"
+               menubarPath="searchMenu/searchwithgroup">
          </action>
       </objectContribution>
    </extension>

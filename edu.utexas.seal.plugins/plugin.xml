@@ -94,6 +94,7 @@
                   label="Select Context Nodes - Class Level"
                   style="push">
             </command>
+            
          </menu>
       </menuContribution>
    </extension>

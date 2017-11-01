@@ -44,6 +44,7 @@ Export-Package: ch.uzh.ifi.seal.changedistiller;uses:="ch.uzh.ifi.seal.changedis
    com.google.inject",
  ut.seal.plugins.utils.change,
  ut.seal.plugins.utils.others,
+ ut.seal.plugins.utils.visitor,
  ut.seal.weka.cluster,
  weka.clusterers
 Bundle-ClassPath: lib/aopalliance-1.0.jar,

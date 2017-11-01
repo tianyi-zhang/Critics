@@ -49,7 +49,7 @@ public class UTPlugin {
 	public static final String	ID_VIEW_OVERLAY					= "edu.utexas.seal.plugins.overlay.view.CriticsOverlayView";
 	public static final String	ID_VIEW_NEW_OVERLAY				= "edu.utexas.seal.plugins.overlay.view.CriticsOverlayNewView";
 	public static final String	ID_TEXT_SELECTCON				= "selectContext";
-	public static final String	ITEM_TEXT_SELECTCON				= "Select Diff Region";
+	public static final String	ITEM_TEXT_SELECTCON				= "Select Diff Region";	
 
 	/**
 	 * 

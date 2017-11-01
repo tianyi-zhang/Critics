@@ -1,13 +1,13 @@
 # ##########################################################
 #		CONFIGURATION
 # ##########################################################
-@INPUTDIRPATH        :/media/troy/Disk2/Critics-luna/UT.INPUT
-@LOG4J.PROPERTIES    :/media/troy/Disk2/Critics-luna/org.eclipse.compare/log4j/log4j.properties
-@LOG4J.PATH          :/media/troy/Disk2/Critics-luna/UT.INPUT/log4j/
-@CSVFILENAME         :/media/troy/Disk2/Critics-luna/UT.INPUT/dataSimScoreJdtCore.csv
-@ARFFFILENAME        :/media/troy/Disk2/Critics-luna/UT.INPUT/dataSimScoreJdtCore.arff
-@IMGINPATH           :/media/troy/Disk2/Critics-luna/UT.INPUT/img/include.gif
-@IMGEXPATH           :/media/troy/Disk2/Critics-luna/UT.INPUT/img/exclude.gif
-@TEXTDRAG_JS         :/media/troy/Disk2/Critics-luna/UT.INPUT/textDrag.js
+@INPUTDIRPATH        :/Users/Aish/Documents/Critics/UT.INPUT
+@LOG4J.PROPERTIES    :/Users/Aish/Documents/Critics/org.eclipse.compare/log4j/log4j.properties
+@LOG4J.PATH          :/Users/Aish/Documents/Critics/UT.INPUT/log4j/
+@CSVFILENAME         :/Users/Aish/Documents/Critics/UT.INPUT/dataSimScoreJdtCore.csv
+@ARFFFILENAME        :/Users/Aish/Documents/Critics/UT.INPUT/dataSimScoreJdtCore.arff
+@IMGINPATH           :/Users/Aish/Documents/Critics/UT.INPUT/img/include.gif
+@IMGEXPATH           :/Users/Aish/Documents/Critics/UT.INPUT/img/exclude.gif
+@TEXTDRAG_JS         :/Users/Aish/Documents/Critics/UT.INPUT/textDrag.js
 @CLUSTER.LIMIT.SIZE  :1
 @SIMILARITY_THRESHOLD:1

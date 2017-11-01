@@ -85,6 +85,7 @@ Import-Package: ch.uzh.ifi.seal.changedistiller,
  ut.seal.plugins.utils,
  ut.seal.plugins.utils.ast,
  ut.seal.plugins.utils.change,
+ ut.seal.plugins.utils.visitor,
  ut.seal.weka.cluster,
  weka.clusterers
 Bundle-ManifestVersion: 2
