@@ -116,6 +116,9 @@ public class UTASTSearchVisitor extends ASTVisitor{
 		return Predicate.predicate.toString();
 		
 	}
+	public void clearPredicates(){
+		Predicate.predicate = new StringBuilder();
+	}
 }
 
 

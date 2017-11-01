@@ -55,8 +55,7 @@ public class ConvertToFactAction extends BaseCompareAction {
 		CompilationUnit cu = searchParser.parseBlock(s.getText());
 		visitor = new UTASTSearchVisitor();
 		cu.accept(visitor);
-		visitor.getPredicates();
-		
+		visitor.getPredicates();		
 	}
 	protected boolean isEnabled(ISelection s) {		
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();

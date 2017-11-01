@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -32,12 +33,9 @@ public class CriticsOverlaySearchPredicate extends ViewPart {
 	}
 	
 	
-	public static void updateViewer(){
-		for(int i=0;i<ModelProvider.INSTANCE.getResults().size();i++){
-			viewer.clear(i);
-		}
-		viewer.refresh();
-		String[] value = ConvertToFactAction.visitor.getPredicates().split("\\n");		
+	public static void updateViewer(){				
+		String[] value = ConvertToFactAction.visitor.getPredicates().split("\\n");	
+		ConvertToFactAction.visitor.clearPredicates();
 		ModelProvider.INSTANCE.setResults(Arrays.asList(value));
 		viewer.setInput(ModelProvider.INSTANCE.getResults());		
 		viewer.refresh();
