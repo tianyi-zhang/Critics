@@ -5,78 +5,101 @@ import java.util.List;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.ArrayAccess;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.ForStatement;
 import org.eclipse.jdt.core.dom.IfStatement;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.MethodInvocation;
-import org.eclipse.jdt.core.dom.MethodRef;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-import ut.seal.plugins.utils.*;
-
-public class UTASTSearchVisitor extends ASTVisitor{		
+public class UTASTSearchPredVisitor extends ASTVisitor{		
 	StringBuilder predicate;
 	List<Predicate> predicates = new ArrayList<>();
 	int count;
 	String currentVar;
 	boolean isAssignment;
 	String visitingMethod;
-		
-	public UTASTSearchVisitor(String methodName) {
-		// TODO Auto-generated constructor stub
+	boolean isCheckRet;
+	boolean isCheckPreCondition;
+	boolean isMethodInvocation;
+	List<org.eclipse.jdt.core.dom.Expression> args;
+	org.eclipse.jdt.core.dom.Expression ifConditionExpression;
+	List<String> callStack;
+	
+	
+	public List<String> getCallStack() {
+		return callStack;
+	}
+
+	public void setCallStack(List<String> callStack) {
+		this.callStack = callStack;
+	}
+
+	public UTASTSearchPredVisitor(String methodName) {		
 		this.visitingMethod = visitingMethod;
+		callStack = new ArrayList<>();
 	}
 
 	public boolean visit(){
 		return true;
 	}
 	
-	public boolean visit(FieldAccess node){
-		if(isAssignment){
-			currentVar = node.getName().toString();
-		}
+	public boolean visit(FieldAccess node){		
+		callStack.add("FieldAccess:"+node.getName().toString());
 		return true;
 	}
 	
-	public boolean visit(SimpleName node){
-		if(isAssignment){
-			currentVar = node.getIdentifier();
-		}
+	public boolean visit(SimpleName node){		
+		if(UTASTSearchTypeVisitor.variableTypes.containsKey(node.getIdentifier().toString())){
+			if(isMethodInvocation){
+				callStack.add("MethodParam:"+node.getIdentifier());
+			}else{
+				callStack.add("VariableAccess:"+node.getIdentifier());
+			}
+			
+		}		
 		return true;
 	}
 	public boolean visit(IfStatement node){		
 		Conditional cond = new Conditional();
-		org.eclipse.jdt.core.dom.Expression exp = node.getExpression();
-		if(exp.getNodeType() == 32){
-			cond.hasFunctionCall = true;
+		ifConditionExpression = node.getExpression();
+		if(ifConditionExpression.getNodeType()== 27  || ifConditionExpression.getNodeType() == 36 || ifConditionExpression.getNodeType() == 37){
+			InfixExpression exp = (InfixExpression) ifConditionExpression;
+			exp.getLeftOperand();
 		}
-		if(exp.getNodeType()== 62){
-			cond.hasExpression = true; 
+		if(isMethodInvocation){
+			//get list of method params and variable in the expressiona nd check if they are the same
+			//look at the return value expression and compare it against the ifconditionexpression
+			
+		} else{
+			//check the inside method invocation
+//			for(int  i=0;i<args.size();i++){
+//				if(ifConditionExpression.toString().contains(args.get(i).toString())){
+//					
+//				}
+//			}
 		}
-		if(exp.getNodeType()==9){
-			cond.hasLiteral = true;
-		}
-		if(exp.getNodeType()==42){
-			cond.hasVariable = true;
-		}
+		callStack.add("if");
 		predicates.add(cond);
 		return true;
 	}
 	
-	public boolean visit(MethodInvocation node){				
+	public void endVisit(IfStatement node){
+		callStack.add("Endif");
+	}
+	
+	public boolean visit(MethodInvocation node){
+		isMethodInvocation = true;
 		count=0;		 
+		callStack.add("MethodCall:"+node.getName().getFullyQualifiedName());
 		return true;
 	}	
 	
 	public void endVisit(MethodInvocation node){
-		FunctionCall call = new FunctionCall();
-		call.methodName = node.getName().toString();
-		call.noOfParam =node.arguments().size();
-		predicates.add(call);
+		isMethodInvocation = false;
+		callStack.add("EndMethodCall:"+node.getName().getFullyQualifiedName());
 		count=0;
 	}
 	public boolean visit(org.eclipse.jdt.core.dom.Expression node) {

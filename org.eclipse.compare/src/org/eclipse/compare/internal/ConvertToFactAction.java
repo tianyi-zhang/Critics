@@ -25,15 +25,16 @@ import org.eclipse.ui.PlatformUI;
 
 import edu.utexas.seal.plugins.overlay.view.CriticsOverlaySearchPredicate;
 import ut.seal.plugins.utils.UTFile;
+import ut.seal.plugins.utils.UTParseCallList;
 import ut.seal.plugins.utils.ast.UTASTNodeFinder;
 import ut.seal.plugins.utils.ast.UTASTParser;
 import ut.seal.plugins.utils.ast.UTASTSearchParser;
+import ut.seal.plugins.utils.visitor.UTASTSearchPredVisitor;
 import ut.seal.plugins.utils.visitor.UTASTSearchTypeVisitor;
-import ut.seal.plugins.utils.visitor.UTASTSearchVisitor;
 
 public class ConvertToFactAction extends BaseCompareAction {
 
-	public static UTASTSearchVisitor visitor;
+	public static UTASTSearchPredVisitor visitor;
 	public static String methodName;
 	
 	@Override
@@ -75,12 +76,17 @@ public class ConvertToFactAction extends BaseCompareAction {
 		});	
 	}
 	
+	
 	public void processSelection(TextSelection s,String path){		
 		UTASTSearchParser searchParser = new UTASTSearchParser();
 		CompilationUnit cu = searchParser.parseBlock(s.getText());
-		visitor = new UTASTSearchVisitor(this.methodName);
+		visitor = new UTASTSearchPredVisitor(this.methodName);
 		cu.accept(visitor);
-		visitor.getPredicates();		
+		UTParseCallList parse = new UTParseCallList();
+		String predicate = parse.parseForCheckPreCondition(visitor.getCallStack());
+//		visitor = new UTASTSearchVisitor(this.methodName);
+//		cu.accept(visitor);
+//		visitor.getPredicates();		
 	}
 	
 	protected boolean isEnabled(ISelection s) {		

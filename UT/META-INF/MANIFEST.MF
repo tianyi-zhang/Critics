@@ -61,4 +61,5 @@ Bundle-ClassPath: lib/aopalliance-1.0.jar,
  .
 Import-Package: edu.utexas.seal.plugins.ast.binding,
  edu.utexas.seal.plugins.util,
- edu.utexas.seal.plugins.util.visitor
+ edu.utexas.seal.plugins.util.visitor,
+ org.eclipse.compare.internal
