@@ -12,11 +12,11 @@ import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.VariableDeclaration;
+import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-public class UTASTSearchPredVisitor extends ASTVisitor{		
-	StringBuilder predicate;
-	List<Predicate> predicates = new ArrayList<>();
+public class UTASTSearchPredVisitor extends ASTVisitor{			
 	int count;
 	String currentVar;
 	boolean isAssignment;
@@ -57,13 +57,20 @@ public class UTASTSearchPredVisitor extends ASTVisitor{
 				callStack.add("MethodParam:"+node.getIdentifier());
 			}else{
 				callStack.add("VariableAccess:"+node.getIdentifier());
-			}
-			
+			}						
 		}		
 		return true;
 	}
-	public boolean visit(IfStatement node){		
-		Conditional cond = new Conditional();
+	public boolean visit(VariableDeclarationStatement node){
+		callStack.add("VariableDeclaration");
+		return true;
+	}
+	
+	public void endVisit(VariableDeclarationStatement node){
+		callStack.add("EndVariableDeclaration");		
+	}
+	
+	public boolean visit(IfStatement node){				
 		ifConditionExpression = node.getExpression();
 		if(ifConditionExpression.getNodeType()== 27  || ifConditionExpression.getNodeType() == 36 || ifConditionExpression.getNodeType() == 37){
 			InfixExpression exp = (InfixExpression) ifConditionExpression;
@@ -81,8 +88,7 @@ public class UTASTSearchPredVisitor extends ASTVisitor{
 //				}
 //			}
 		}
-		callStack.add("if");
-		predicates.add(cond);
+		callStack.add("if");		
 		return true;
 	}
 	
@@ -112,138 +118,25 @@ public class UTASTSearchPredVisitor extends ASTVisitor{
 	}
 
 	public boolean visit(org.eclipse.jdt.core.dom.Assignment node){
-		isAssignment = true;		
+		isAssignment = true;	
+		callStack.add("Assignment");		
 		return true;
 	}
 	
 	public void endVisit(org.eclipse.jdt.core.dom.Assignment node){
-		isAssignment = false;
-		Assignment assignment = new Assignment();		
-		assignment.rightExpression = ASTNode.nodeClassForType(node.getRightHandSide().getNodeType()).getSimpleName();
-		
-		predicates.add(assignment);
-	
+		isAssignment = false;				
+		callStack.add("EndAssignment");
 	}
 	
 	public boolean visit(WhileStatement node){
-		Iteration iter = new Iteration();
-		iter.conditionType = ASTNode.nodeClassForType(node.getExpression().getNodeType()).getSimpleName();	
-		predicates.add(iter);
+		
 		return true;
 	}
 	
-	public boolean visit(ForStatement node){		
-		Iteration iter = new Iteration();
-		iter.conditionType = ASTNode.nodeClassForType(node.getExpression().getNodeType()).getSimpleName();		
-		predicates.add(iter);
+	public boolean visit(ForStatement node){						
+		
 		return true;
 	}
-	
-	public String getPredicates(){			
-		for(int i=0;i<predicates.size();i++){			
-			predicates.get(i).print();			
-		}
-		return Predicate.predicate.toString();
-		
-	}
-	public void clearPredicates(){
-		Predicate.predicate = new StringBuilder();
-	}
 }
 
 
-class Predicate{
-	static StringBuilder predicate = new StringBuilder();
-	void print() {
-	}	
-}
-
-class FunctionCall extends Predicate{
-	String methodName;
-	int noOfParam;	
-
-	@Override
-	void print() {
-		// TODO Auto-generated method stub
-		predicate.append("has_functioncall("+methodName+","+noOfParam+")");
-		predicate.append("^");		
-		predicate.append("\n");
-	}	
-}
-
-class Conditional extends Predicate{
-	boolean hasVariable;
-	boolean hasFunctionCall;
-	boolean hasLiteral;	
-	boolean hasExpression;
-	
-	void print(){
-		if(hasFunctionCall){
-			predicate.append("has_if(functioncall)");
-			predicate.append("^");
-			predicate.append("\n");
-		}
-		if(hasVariable){
-			predicate.append("has_if(variable)");
-			predicate.append("^");
-			predicate.append("\n");
-		}
-		if(hasFunctionCall){
-			predicate.append("has_if(literal)");
-			predicate.append("^");
-			predicate.append("\n");
-		}
-		if(hasFunctionCall){
-			predicate.append("has_if(expression)");
-			predicate.append("^");
-			predicate.append("\n");
-		}
-	}
-
-		
-}
-
-class Declaration extends Predicate{
-	String name;
-
-	@Override
-	void print() {
-		// TODO Auto-generated method stub
-		
-	}
-}
-
-class Assignment extends Predicate{
-	String name;
-	String type;
-	String rightExpression;
-	@Override
-	void print() {
-		// TODO Auto-generated method stub
-		predicate.append("has_assign("+name+","+type+","+rightExpression+")");
-		predicate.append("^");
-		predicate.append("\n");
-	}
-}
-
-class Iteration extends Predicate{
-	String conditionType;
-
-	@Override
-	void print() {
-		// TODO Auto-generated method stub
-		predicate.append("has_iter("+conditionType+")");
-		predicate.append("^");
-		predicate.append("\n");
-	}	
-}
-
-class Expression extends Predicate{
-	String type;
-
-	@Override
-	void print() {
-		// TODO Auto-generated method stub
-		
-	}	
-}

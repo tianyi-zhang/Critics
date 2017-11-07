@@ -84,6 +84,7 @@ public class ConvertToFactAction extends BaseCompareAction {
 		cu.accept(visitor);
 		UTParseCallList parse = new UTParseCallList();
 		String predicate = parse.parseForCheckPreCondition(visitor.getCallStack());
+		predicate = parse.parseForCheckPostCondition(visitor.getCallStack());
 //		visitor = new UTASTSearchVisitor(this.methodName);
 //		cu.accept(visitor);
 //		visitor.getPredicates();		

@@ -30,7 +30,7 @@ public class UTParseCallList {
 			
 			if(callStack.get(i).contains("EndMethodCall")){
 				if(isCheckIf){
-					builder.append(convertToPredicate(paramChecked, callStack.get(i).split(":")[1]));
+					builder.append(convertToPreConditionPredicate(paramChecked, callStack.get(i).split(":")[1]));
 					paramChecked.clear();					
 				}	
 			}
@@ -48,7 +48,7 @@ public class UTParseCallList {
 		return builder.toString();
 	}
 	
-	public String convertToPredicate(List<String> paramChecked,String methodName){
+	public String convertToPreConditionPredicate(List<String> paramChecked,String methodName){
 		StringBuilder builder = new StringBuilder();
 		if(paramChecked.size()>0){
 			for(int i=0;i<paramChecked.size();i++){				
@@ -69,6 +69,58 @@ public class UTParseCallList {
 			
 		}
 		return builder.toString();
+	}
+	
+	public String parseForCheckPostCondition(List<String> callStack){
+		StringBuilder builder = new StringBuilder();
+		boolean isAssignment = false;
+		boolean isCheckIf = false;
+		String varToCheck = null;
+		String currentVar = null;
+		String methodName =  null;
+		boolean isWithinAssignment = false;
+		List<String> ifCheckParams = new ArrayList<>();
+		
+		for(int i=0;i<callStack.size();i++){
+			if(callStack.get(i).contains("Assignment") || callStack.get(i).contains("VariableDeclaration")){
+				isAssignment = true;
+				isWithinAssignment = true;
+			} 
+						
+			if(callStack.get(i).contains("EndAssignment") || callStack.get(i).contains("EndVariableDeclaration")){
+				isWithinAssignment = false;
+				varToCheck = currentVar;
+			} 
+						
+			if(callStack.get(i).contains("MethodCall")){
+				if(isWithinAssignment){
+					methodName = callStack.get(i).split(":")[1];
+				}											
+			}
+			if(callStack.get(i).contains("VariableAccess")|| callStack.get(i).contains("FieldAccess")){
+				currentVar = callStack.get(i).split(":")[1];
+				ifCheckParams.add(currentVar);
+			}
+								
+			if(callStack.get(i).contains("if")){
+				isCheckIf = true;
+			}
+			
+			
+			if(callStack.get(i).contains("Endif")){
+				if(isAssignment && isCheckIf && ifCheckParams.contains(varToCheck)){
+					builder.append("check_ret_value(");
+					builder.append(ConvertToFactAction.methodName);
+					builder.append(",");
+					builder.append(methodName);
+					builder.append(")");
+				}
+				isCheckIf = false;
+				isAssignment = false;
+			}							
+		}
+		
+		return builder.toString();		
 	}
 }
 
