@@ -35,7 +35,7 @@ public class CriticsOverlaySearchPredicate extends ViewPart {
 	
 	public static void updateViewer(){				
 		String[] value = ConvertToFactAction.visitor.getPredicates().split("\\n");	
-		ConvertToFactAction.visitor.clearPredicates();
+		ConvertToFactAction.visitor.clearPredicates();	
 		ModelProvider.INSTANCE.setResults(Arrays.asList(value));
 		viewer.setInput(ModelProvider.INSTANCE.getResults());		
 		viewer.refresh();

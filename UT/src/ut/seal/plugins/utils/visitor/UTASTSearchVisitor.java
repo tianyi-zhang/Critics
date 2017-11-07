@@ -9,6 +9,7 @@ import org.eclipse.jdt.core.dom.ArrayAccess;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.ForStatement;
 import org.eclipse.jdt.core.dom.IfStatement;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.MethodRef;
 import org.eclipse.jdt.core.dom.ReturnStatement;
@@ -17,13 +18,19 @@ import org.eclipse.jdt.core.dom.WhileStatement;
 
 import ut.seal.plugins.utils.*;
 
-public class UTASTSearchVisitor extends ASTVisitor{
-		
+public class UTASTSearchVisitor extends ASTVisitor{		
 	StringBuilder predicate;
 	List<Predicate> predicates = new ArrayList<>();
 	int count;
 	String currentVar;
 	boolean isAssignment;
+	String visitingMethod;
+		
+	public UTASTSearchVisitor(String methodName) {
+		// TODO Auto-generated constructor stub
+		this.visitingMethod = visitingMethod;
+	}
+
 	public boolean visit(){
 		return true;
 	}

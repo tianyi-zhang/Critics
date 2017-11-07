@@ -10,8 +10,10 @@
  *******************************************************************************/
 package org.eclipse.compare;
 
-import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Sash;
 
 /**
  * The Splitter adds support for nesting to a SashForm.

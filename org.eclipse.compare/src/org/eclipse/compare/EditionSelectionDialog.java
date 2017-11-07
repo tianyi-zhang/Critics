@@ -20,10 +20,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.ibm.icu.text.DateFormat;
-import com.ibm.icu.text.MessageFormat;
-import com.ibm.icu.util.Calendar;
-
+import org.eclipse.compare.internal.CompareContainer;
+import org.eclipse.compare.internal.CompareUIPlugin;
+import org.eclipse.compare.internal.ResizableDialog;
+import org.eclipse.compare.internal.StructureCreatorDescriptor;
+import org.eclipse.compare.internal.Utilities;
+import org.eclipse.compare.structuremergeviewer.DiffNode;
+import org.eclipse.compare.structuremergeviewer.ICompareInput;
+import org.eclipse.compare.structuremergeviewer.IStructureComparator;
+import org.eclipse.compare.structuremergeviewer.IStructureCreator;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -44,26 +58,9 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
-
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.Viewer;
-
-import org.eclipse.compare.internal.CompareContainer;
-import org.eclipse.compare.internal.CompareUIPlugin;
-import org.eclipse.compare.internal.ResizableDialog;
-import org.eclipse.compare.internal.StructureCreatorDescriptor;
-import org.eclipse.compare.internal.Utilities;
-import org.eclipse.compare.structuremergeviewer.DiffNode;
-import org.eclipse.compare.structuremergeviewer.ICompareInput;
-import org.eclipse.compare.structuremergeviewer.IStructureComparator;
-import org.eclipse.compare.structuremergeviewer.IStructureCreator;
+import com.ibm.icu.text.DateFormat;
+import com.ibm.icu.text.MessageFormat;
+import com.ibm.icu.util.Calendar;
 
 
 /**
