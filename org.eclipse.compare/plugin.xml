@@ -275,6 +275,13 @@
                   name="searchwithgroup">
             </separator>
          </menu>
+         <menu
+               id="factConvert"
+               label="Convert To Facts">
+            <separator
+                  name="convertwithgroup">
+            </separator>
+         </menu>
       </objectContribution>
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"
@@ -363,6 +370,17 @@
                id="convertToFacts"
                label="Convert To Facts"
                menubarPath="searchMenu/searchwithgroup">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.compare.convertfact"
+            objectClass="org.eclipse.core.resources.IResource">
+         <action
+               class="org.eclipse.compare.internal.FactGeneratorAction"
+               id="convert"
+               label="Generate"
+               menubarPath="factConvert/convertwithgroup">
          </action>
       </objectContribution>
    </extension>
