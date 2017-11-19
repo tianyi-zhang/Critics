@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.CatchClause;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.ForStatement;
 import org.eclipse.jdt.core.dom.IfStatement;
@@ -12,6 +13,7 @@ import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.TryStatement;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
@@ -52,13 +54,13 @@ public class UTASTSearchPredVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(SimpleName node){		
-		if(UTASTSearchTypeVisitor.variableTypes.containsKey(node.getIdentifier().toString())){
-			if(isMethodInvocation){
-				callStack.add("MethodParam:"+node.getIdentifier());
-			}else{
-				callStack.add("VariableAccess:"+node.getIdentifier());
-			}						
-		}		
+//		if(UTASTSearchTypeVisitor.variableTypes.containsKey(node.getIdentifier().toString())){
+//			if(isMethodInvocation){
+//				callStack.add("MethodParam:"+node.getIdentifier());
+//			}else{
+//				callStack.add("VariableAccess:"+node.getIdentifier());
+//			}						
+//		}		
 		return true;
 	}
 	public boolean visit(VariableDeclarationStatement node){
@@ -129,14 +131,35 @@ public class UTASTSearchPredVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(WhileStatement node){
-		
+		callStack.add("Iteration");
+		return true;
+	}
+	public void endVisit(WhileStatement node){
+		callStack.add("EndIteration");
+	}
+	public boolean visit(ForStatement node){						
+		callStack.add("Iteration");
 		return true;
 	}
 	
-	public boolean visit(ForStatement node){						
-		
+	public void endVisit(ForStatement node){
+		callStack.add("EndIteration");
+	}
+	
+	public boolean visit(TryStatement node){
+		callStack.add("TryStart");
 		return true;
 	}
+	
+	public void endVisit(TryStatement node){
+		callStack.add("EndTry");
+	}
+	
+	public boolean visit(CatchClause node){
+		callStack.add("ExceptionType:"+node.getException().getType().toString());
+		return true;
+	}
+	
 }
 
 

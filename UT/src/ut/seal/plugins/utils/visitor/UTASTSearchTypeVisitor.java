@@ -16,8 +16,8 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 public class UTASTSearchTypeVisitor extends ASTVisitor{
 	
-	public static Map<String,String> variableTypes = new HashMap<>();
-	public static Map<String,String> methodTypes = new HashMap<>();
+	public  HashMap<String,String> variableTypes = new HashMap<>();
+	public  HashMap<String,String> methodTypes = new HashMap<>();
 	String currentVar;
 	String currentType;
 	//variable declarations
@@ -26,8 +26,8 @@ public class UTASTSearchTypeVisitor extends ASTVisitor{
 	//
 	//contextual type in If,While,etc	
 	public boolean visit(SingleVariableDeclaration node) {		
-		System.out.println("SingleVariableDeclaration Type: "+node.getType());
-		System.out.println("Variable Name: "+node.getName().toString());	
+//		System.out.println("SingleVariableDeclaration Type: "+node.getType());
+//		System.out.println("Variable Name: "+node.getName().toString());	
 		variableTypes.put(node.getName().toString(), node.getType().toString());
 		return true;
 	} 
@@ -55,8 +55,8 @@ public class UTASTSearchTypeVisitor extends ASTVisitor{
 		if(currentType!=null && currentType.length()>1){
 			variableTypes.put(currentVar, currentType);
 		}				
-		System.out.println("VariableDeclarationFragment Type: "+currentType);
-		System.out.println("Variable Name: "+currentVar);
+//		System.out.println("VariableDeclarationFragment Type: "+currentType);
+//		System.out.println("Variable Name: "+currentVar);
 		return true;
 	}
 	

@@ -368,7 +368,7 @@
                class="org.eclipse.compare.internal.ConvertToFactAction"
                enablesFor="1"
                id="convertToFacts"
-               label="Convert To Facts"
+               label="Generate Query"
                menubarPath="searchMenu/searchwithgroup">
          </action>
       </objectContribution>

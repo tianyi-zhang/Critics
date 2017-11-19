@@ -22,16 +22,35 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-public class UTASTFactGeneratorVisitor extends ASTVisitor{
+public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 
 	
 	public StringBuilder builder = new StringBuilder();
-	public List<String> predicatesForSelection = new ArrayList<>();
-	String currentMethod = null;
+	public List<String> predicatesForMethod = new ArrayList<>();
+	String methodName = null;
 	String className = null;
 	HashMap<String, String> variableTypes = new HashMap<>();
-	
-	
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
+
+	public String getClassName() {
+		return className;
+	}
+
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+
 	public HashMap<String, String> getVariableTypes() {
 		return variableTypes;
 	}
@@ -39,6 +58,10 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 
 	public void setVariableTypes(HashMap<String, String> variableTypes) {
 		this.variableTypes = variableTypes;
+	}
+	
+	public void combineClassAndMethodName(){
+		this.methodName = this.className + ":"+this.methodName;
 	}
 
 
@@ -57,11 +80,11 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(SimpleName node){	
-		if(this.currentMethod != null){
+		if(this.methodName != null){
 			String name = node.getIdentifier().toString();
 			if(variableTypes.get(name)!= null){
 				builder.append("containstype(");
-				builder.append(this.currentMethod.toLowerCase());
+				builder.append(this.methodName.toLowerCase());
 				builder.append(",");
 				
 				builder.append(name.toLowerCase());
@@ -71,10 +94,10 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 					replacingBrackets = replacingBrackets.replaceAll("[\\[\\]]", "");					
 				}
 				
-				builder.append(replacingBrackets.replaceAll("\\.", ""));
-				builder.append(").");
+				builder.append(replacingBrackets);
+				builder.append(")");
 //				builder.append("\n");
-				predicatesForSelection.add(builder.toString().toLowerCase());
+				predicatesForMethod.add(builder.toString().toLowerCase());
 				builder = new StringBuilder();
 			}
 		}
@@ -86,27 +109,27 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(IfStatement node){		
-		if(this.currentMethod!=null){
+		if(this.methodName!=null){
 		builder.append("containsif(");
-		builder.append(this.currentMethod.toLowerCase());
-		builder.append(").");
+		builder.append(this.methodName.toLowerCase());
+		builder.append(")");
 //		builder.append("\n");
-		predicatesForSelection.add(builder.toString().toLowerCase());
+		predicatesForMethod.add(builder.toString().toLowerCase());
 		builder = new StringBuilder();
 		}
 		return true;
 	}	
 	
 	public boolean visit(MethodInvocation node){
-		if(this.currentMethod != null){
+		if(this.methodName != null){
 			builder.append("methodcall(");
-			builder.append(this.currentMethod.toLowerCase());
+			builder.append(this.methodName.toLowerCase());
 			builder.append(",");
 			
 			builder.append(node.getName().getFullyQualifiedName().toLowerCase());	
-			builder.append(").");
+			builder.append(")");
 //			builder.append("\n");
-			predicatesForSelection.add(builder.toString().toLowerCase());
+			predicatesForMethod.add(builder.toString().toLowerCase());
 			builder = new StringBuilder();
 		}
 		
@@ -120,24 +143,24 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	}
 		
 	public boolean visit(WhileStatement node){
-		if(this.currentMethod!=null){
+		if(this.methodName!=null){
 		builder.append("containsiterator(");
-		builder.append(this.currentMethod.toLowerCase());
-		builder.append(").");
+		builder.append(this.methodName.toLowerCase());
+		builder.append(")");
 //		builder.append("\n");
-		predicatesForSelection.add(builder.toString().toLowerCase());
+		predicatesForMethod.add(builder.toString().toLowerCase());
 		builder = new StringBuilder();
 		}
 		return true;
 	}
 	
 	public boolean visit(ForStatement node){			
-		if(this.currentMethod != null){
+		if(this.methodName != null){
 		builder.append("containsiterator(");
-		builder.append(this.currentMethod.toLowerCase());
-		builder.append(").");
+		builder.append(this.methodName.toLowerCase());
+		builder.append(")");
 //		builder.append("\n");
-		predicatesForSelection.add(builder.toString().toLowerCase());
+		predicatesForMethod.add(builder.toString().toLowerCase());
 		builder = new StringBuilder();
 		}
 		return true;
@@ -153,24 +176,24 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	}
 		
 	public boolean visit(CatchClause node){
-		if(this.currentMethod!=null){
+		if(this.methodName!=null){
 		builder.append("catch(");
-		builder.append(this.currentMethod.toLowerCase());
+		builder.append(this.methodName.toLowerCase());
 		builder.append(",");
 		builder.append(node.getException().getType().toString().toLowerCase());
-		builder.append(").");
-		predicatesForSelection.add(builder.toString().toLowerCase());
+		builder.append(")");
+		predicatesForMethod.add(builder.toString().toLowerCase());
 		builder = new StringBuilder();
 		}
 		return true;
 	}
 	
 	public boolean visit(MethodDeclaration node){		
-		this.currentMethod = this.className+":"+node.getName().getFullyQualifiedName().toLowerCase();
+		this.methodName = this.className+":"+node.getName().getFullyQualifiedName().toLowerCase();
 		return true;
 	}
 	
 	public void endVisit(MethodDeclaration node){
-		this.currentMethod = null;
+		this.methodName = null;
 	}
 }

@@ -90,7 +90,6 @@ import org.eclipse.ui.part.IShowInSource;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.services.IServiceLocator;
 import org.eclipse.ui.texteditor.ITextEditorExtension3;
-import org.tigris.subversion.subclipse.core.ISVNRemoteResource;
 import org.tigris.subversion.subclipse.ui.compare.SummaryEditionNode;
 
 import edu.utexas.seal.plugins.util.UTCriticsPairFileInfo;

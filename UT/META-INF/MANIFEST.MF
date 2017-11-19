@@ -30,6 +30,7 @@ Export-Package: ch.uzh.ifi.seal.changedistiller;uses:="ch.uzh.ifi.seal.changedis
  rted.distance,
  rted.processor,
  rted.util,
+ ut.learner,
  ut.seal.plugins.utils;uses:="ch.uzh.ifi.seal.changedistiller.model.entities,org.eclipse.core.runtime,org.apache.commons.exec",
  ut.seal.plugins.utils.ast;
   uses:="ch.uzh.ifi.seal.changedistiller.model.entities,
@@ -58,6 +59,7 @@ Bundle-ClassPath: lib/aopalliance-1.0.jar,
  lib/commons-exec-1.1.jar,
  lib/log4j-1.2.17.jar,
  lib/commons-lang3-3.2.1.jar,
+ lib/jpl-7.0.1.jar,
  .
 Import-Package: edu.utexas.seal.plugins.ast.binding,
  edu.utexas.seal.plugins.util,

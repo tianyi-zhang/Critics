@@ -19,6 +19,7 @@
 	<classpathentry kind="lib" path="lib/java-cup.jar"/>
 	<classpathentry kind="lib" path="lib/JFlex.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jpl-7.0.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

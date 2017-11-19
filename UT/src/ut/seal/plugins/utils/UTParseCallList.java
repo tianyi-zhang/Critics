@@ -63,7 +63,7 @@ public class UTParseCallList {
 				builder.append("type(");
 				builder.append(paramChecked.get(i));
 				builder.append(",");
-				builder.append(UTASTSearchTypeVisitor.variableTypes.get(paramChecked.get(i)));
+//				builder.append(UTASTSearchTypeVisitor.variableTypes.get(paramChecked.get(i)));
 				builder.append(")");
 			}
 			
