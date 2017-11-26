@@ -1,13 +1,13 @@
 # ##########################################################
 #		CONFIGURATION
 # ##########################################################
-@INPUTDIRPATH        :/Users/Aish/Documents/Critics/UT.INPUT
-@LOG4J.PROPERTIES    :/Users/Aish/Documents/Critics/org.eclipse.compare/log4j/log4j.properties
-@LOG4J.PATH          :/Users/Aish/Documents/Critics/UT.INPUT/log4j/
-@CSVFILENAME         :/Users/Aish/Documents/Critics/UT.INPUT/dataSimScoreJdtCore.csv
-@ARFFFILENAME        :/Users/Aish/Documents/Critics/UT.INPUT/dataSimScoreJdtCore.arff
-@IMGINPATH           :/Users/Aish/Documents/Critics/UT.INPUT/img/include.gif
-@IMGEXPATH           :/Users/Aish/Documents/Critics/UT.INPUT/img/exclude.gif
-@TEXTDRAG_JS         :/Users/Aish/Documents/Critics/UT.INPUT/textDrag.js
+@INPUTDIRPATH        :/home/whirlwind/dev/Critics/UT.INPUT
+@LOG4J.PROPERTIES    :/home/whirlwind/dev/Critics/org.eclipse.compare/log4j/log4j.properties
+@LOG4J.PATH          :/home/whirlwind/dev/Critics/UT.INPUT/log4j/
+@CSVFILENAME         :/home/whirlwind/dev/Critics/UT.INPUT/dataSimScoreJdtCore.csv
+@ARFFFILENAME        :/home/whirlwind/dev/Critics/UT.INPUT/dataSimScoreJdtCore.arff
+@IMGINPATH           :/home/whirlwind/dev/Critics/UT.INPUT/img/include.gif
+@IMGEXPATH           :/home/whirlwind/dev/Critics/UT.INPUT/img/exclude.gif
+@TEXTDRAG_JS         :/home/whirlwind/dev/Critics/UT.INPUT/textDrag.js
 @CLUSTER.LIMIT.SIZE  :1
 @SIMILARITY_THRESHOLD:1

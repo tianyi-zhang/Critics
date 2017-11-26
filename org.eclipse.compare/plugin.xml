@@ -64,6 +64,12 @@
             name="Predicate View"
             restorable="true">
       </view>
+      <view
+            class="edu.utexas.seal.plugins.overlay.view.CriticsOverlayQueryBrowser"
+            id="edu.utexas.seal.plugins.overlay.view.CriticsOverlayQueryBrowser"
+            name="Query"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -368,7 +374,7 @@
                class="org.eclipse.compare.internal.ConvertToFactAction"
                enablesFor="1"
                id="convertToFacts"
-               label="Generate Query"
+               label="For Examples"
                menubarPath="searchMenu/searchwithgroup">
          </action>
       </objectContribution>

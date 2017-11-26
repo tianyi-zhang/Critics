@@ -103,7 +103,6 @@ public class ClauseGeneralizer {
 		builder.append(this.methodVariableName);
 		builder.append(",");
 		builder.append(str[1].split(",")[1]);
-		builder.append(str[1].split(",")[2]);
 		this.firstOrderPredicate.add(builder.toString());
 	}
 	
@@ -115,6 +114,13 @@ public class ClauseGeneralizer {
 			}
 		}
 		return droppedTypePredicate;
+	}
+	
+	public List<String> dropPredicates(List<String> predicateList, int n){
+		if(n>1){
+			return predicateList.subList(0,n);
+		} 
+		return predicateList;
 	}
 	
 }

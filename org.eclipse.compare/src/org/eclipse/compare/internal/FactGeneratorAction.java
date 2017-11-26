@@ -30,6 +30,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+import ut.learner.ClassInfo;
+import ut.learner.MethodInfo;
+import ut.learner.PackageInfo;
 import ut.seal.plugins.utils.UTFile;
 import ut.seal.plugins.utils.ast.UTASTNodeFinder;
 import ut.seal.plugins.utils.ast.UTASTParser;
@@ -39,6 +42,7 @@ import ut.seal.plugins.utils.visitor.UTASTSearchTypeVisitor;
 public class FactGeneratorAction extends BaseCompareAction{
 
 	List<IResource> allJavaFiles = new ArrayList<IResource>();
+	HashMap<String, ClassInfo> classInfoMap= new HashMap<String, ClassInfo>();
 	
 	@Override
 	protected void run(ISelection selection) {
@@ -52,13 +56,14 @@ public class FactGeneratorAction extends BaseCompareAction{
             if(myWorkspaceRoot!=null){
             	getAllFiles(project.getLocation(), myWorkspaceRoot);
             	convertAllJavaFilesToFacts(project.getLocationURI().getRawPath().toString());
+            	writePackageInfoToFile(project.getLocationURI().getRawPath().toString());
             }                        
         }
 	}
 	
 	public void convertAllJavaFilesToFacts(String projectPath){
 		BufferedWriter output = null;
-		
+
 		String fileLocation = projectPath+"/facts.pl";
 		System.out.println(fileLocation);
 		File file = new File(fileLocation);
@@ -70,6 +75,8 @@ public class FactGeneratorAction extends BaseCompareAction{
 				UTASTParser parser = new UTASTParser();
 				IResource res = allJavaFiles.get(i);
 				final CompilationUnit unit = parser.parse(UTFile.getContents(res.getRawLocation().toOSString()));
+				visitor.setUnit(unit);
+				
 				UTASTSearchTypeVisitor typesOFClass = new UTASTSearchTypeVisitor();
 				typesOFClass = buildTypes(unit);								
 				
@@ -77,6 +84,12 @@ public class FactGeneratorAction extends BaseCompareAction{
 				
 				unit.accept(visitor);				
 				
+				ClassInfo info = new ClassInfo();
+				info.setClassName(visitor.className);
+				info.setMethods(visitor.methods);
+				info.setPath(res.getFullPath().toOSString());
+				
+				this.classInfoMap.put(visitor.className, info);
 				
 				HashSet<String> set = new HashSet<>();
 				set.addAll(visitor.predicatesForSelection);
@@ -88,11 +101,12 @@ public class FactGeneratorAction extends BaseCompareAction{
 					builder.append("\n");
 				}
 				output.write(builder.toString());
-				builder = new StringBuilder();
-				System.out.println("Done writing for file : "+allJavaFiles.get(i));
+				builder = new StringBuilder();				
 			}
 			
 			System.out.println("Done Writing");
+			PackageInfo.classInfoMap.clear();
+			PackageInfo.classInfoMap.putAll(this.classInfoMap);
 			output.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,6 +115,29 @@ public class FactGeneratorAction extends BaseCompareAction{
 		
 	}	
 	
+	public void writePackageInfoToFile(String projectPath){
+		BufferedWriter output = null;
+		String fileLocation = projectPath+"/packageinfo.txt";
+		System.out.println(fileLocation);
+		File file = new File(fileLocation);
+		try {
+			output = new BufferedWriter(new FileWriter(file));
+			StringBuilder builder = new StringBuilder();
+			for(String key : PackageInfo.classInfoMap.keySet()){
+				String tmp = key+":"+PackageInfo.classInfoMap.get(key).getPath();
+				List<MethodInfo> methods = PackageInfo.classInfoMap.get(key).getMethods();
+				for(int i=0;i<methods.size();i++){
+					String tmp2 = ":"+methods.get(i).getMethodName()+":"+ methods.get(i).getStartLineNumber();
+					builder.append(tmp+tmp2);
+					builder.append("\n");	
+				}								
+			}
+			output.write(builder.toString());
+			output.close();			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	public UTASTSearchTypeVisitor buildTypes(CompilationUnit unit){				
 		UTASTSearchTypeVisitor searchTypesVisitor = new UTASTSearchTypeVisitor();
@@ -116,8 +153,12 @@ public class FactGeneratorAction extends BaseCompareAction{
 	        iResources = container.members();
 	        for (IResource iR : iResources){
 	            // for c files
-	            if ("java".equalsIgnoreCase(iR.getFileExtension()))
+	            if ("java".equalsIgnoreCase(iR.getFileExtension())){
 	            	allJavaFiles.add(iR);
+//	            	String className = iR.getName().split("\\.")[0];
+//	            	classFilepathMap.put(className.toLowerCase(), iR.getRawLocation().toOSString());
+
+	            }	            	
 	            if (iR.getType() == IResource.FOLDER){
 	                IPath tempPath = iR.getLocation();
 	                getAllFiles(tempPath,iWorkspaceRoot);

@@ -66,7 +66,7 @@ public class UTCriticsPreprocessor implements IStartup {
 				UTCriticsFileFilter filter = new UTCriticsFileFilter();
 				try {
 					IPackageFragment[] packages = javaProject.getPackageFragments();
-					filter.process(packages);
+//					filter.process(packages);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

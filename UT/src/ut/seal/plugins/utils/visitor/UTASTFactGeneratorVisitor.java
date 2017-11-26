@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CatchClause;
+import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.ForStatement;
@@ -22,16 +23,31 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
+import ut.learner.MethodInfo;
+
 public class UTASTFactGeneratorVisitor extends ASTVisitor{
 
 	
 	public StringBuilder builder = new StringBuilder();
 	public List<String> predicatesForSelection = new ArrayList<>();
-	String currentMethod = null;
-	String className = null;
+	public String currentMethod = null;
+	public String className = null;
+	public List<MethodInfo> methods = new ArrayList<MethodInfo>();
 	HashMap<String, String> variableTypes = new HashMap<>();
+	CompilationUnit unit;
 	
 	
+	
+	public CompilationUnit getUnit() {
+		return unit;
+	}
+
+
+	public void setUnit(CompilationUnit unit) {
+		this.unit = unit;
+	}
+
+
 	public HashMap<String, String> getVariableTypes() {
 		return variableTypes;
 	}
@@ -136,7 +152,6 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 		builder.append("containsiterator(");
 		builder.append(this.currentMethod.toLowerCase());
 		builder.append(").");
-//		builder.append("\n");
 		predicatesForSelection.add(builder.toString().toLowerCase());
 		builder = new StringBuilder();
 		}
@@ -145,10 +160,6 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	
 	
 	public boolean visit(TryStatement node){
-//		builder.append("trystatement(");
-//		builder.append(this.currentMethod);
-//		builder.append(").");
-//		builder.append("\n");
 		return true;
 	}
 		
@@ -166,6 +177,8 @@ public class UTASTFactGeneratorVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(MethodDeclaration node){		
+		MethodInfo info = new MethodInfo(node.getName().getFullyQualifiedName().toLowerCase(),(unit.getLineNumber(node.getStartPosition())-1));
+		this.methods.add(info);
 		this.currentMethod = this.className+":"+node.getName().getFullyQualifiedName().toLowerCase();
 		return true;
 	}

@@ -1,0 +1,48 @@
+package ut.learner;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class PackageInfo {
+	public static HashMap<String, ClassInfo> classInfoMap= new HashMap<String, ClassInfo>();
+	
+	public static void readPackageInfo(){
+		File currDir = new File(".");
+	    String path = currDir.getAbsolutePath();
+	    System.out.println(path);
+	    System.out.println("Working Directory = " +
+	              System.getProperty("user.dir"));
+	    String fileLocation = "/home/whirlwind/runtime-Critics_Search/NEW_JDT9801/packageinfo.txt";
+		System.out.println(fileLocation);
+		File file = new File(fileLocation);
+	    
+	    try (BufferedReader br = new BufferedReader(new FileReader(fileLocation))) {
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	           // process the line.
+	        	String[] info = line.split(":");
+	        	ClassInfo classInfo = new ClassInfo();
+	        	classInfo.setClassName(info[0]);
+	        	classInfo.setMethods(new ArrayList<MethodInfo>());
+	        	classInfo.setPath(info[1]);
+	        	MethodInfo methodInfo = new MethodInfo(info[2],Integer.parseInt(info[3]));
+	        	classInfo.getMethods().add(methodInfo);
+	        	if(PackageInfo.classInfoMap.containsKey(info[0])){
+	        		PackageInfo.classInfoMap.get(info[0]).getMethods().add(methodInfo);
+	        	} else{
+	        		PackageInfo.classInfoMap.put(info[0], classInfo);
+	        	}
+	        	
+	        }
+	    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+}
