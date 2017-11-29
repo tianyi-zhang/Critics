@@ -61,6 +61,18 @@ public class SearchResuts {
 			exampleType[i] = false;
 		}
 	}
+	public void extendExampleType(){
+		Boolean[] localExampleType  = new Boolean[searchInfo.size()];
+		int i=0;
+		for( i=0;i<exampleType.length;i++){
+			localExampleType[i] = exampleType[i];
+		}
+		for(;i<localExampleType.length;i++){
+			localExampleType[i] = false;
+		}
+		exampleType = localExampleType;
+	}
+	
 	public List<ResultInfo> getSearchInfo() {
 		return searchInfo;
 	}

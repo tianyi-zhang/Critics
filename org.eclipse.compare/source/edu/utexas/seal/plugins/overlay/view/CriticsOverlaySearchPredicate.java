@@ -71,21 +71,23 @@ public class CriticsOverlaySearchPredicate extends ViewPart {
 		viewer.refresh();		
 	}
 	
-	public static void changeOldRecords(){
-		
-		
+	public static void changeOldRecords(){	
 		final TableItem[] items = viewer.getTable().getItems();
 		for( int i=0;i<items.length;i++){
 			StyleRange range = new StyleRange();
-			if(Learner.RESULTS.getSearchInfo().get(i).isOld()){
+			if(Learner.RESULTS.getSearchInfo().get(i).isOld() && !Learner.RESULTS.getExampleTypeAtIndex(i)){
 				items[i].setGrayed(true);
 				items[i].setChecked(false);
-				items[i].setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+				items[i].setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 //				items[i].setBackground(Color.);												
-			} else{
+			} 
+			if(!Learner.RESULTS.getSearchInfo().get(i).isOld()){
 				items[i].setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
 			}
 			
+			if(Learner.RESULTS.getSearchInfo().get(i).isOld() && !Learner.RESULTS.getSearchInfo().get(i).isIncluded() && Learner.RESULTS.getExampleTypeAtIndex(i)){
+				items[i].setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+			}
 			
 		}
 	}

@@ -11,7 +11,7 @@ public class SpecializationOperator {
 	Stack<String> predicatesAllowed;
 	QueryProlog prolog = new QueryProlog();
 	List<String> antecedents = new ArrayList<String>();
-	
+	List<ResultInfo> matchedResults = new ArrayList<ResultInfo>();
 	
 	
 	public SpecializationOperator(List<String> positiveExamples,
@@ -33,12 +33,49 @@ public class SpecializationOperator {
 		System.out.println(antecedents.toString());
 		String query = prolog.getQueryString(antecedents);
 		
-		List<ResultInfo> matchedResults = prolog.executeSelectedQuery(query, antecedents);
+		 matchedResults = prolog.executeSelectedQuery(query, antecedents);
 		markOldRecords();
-		Learner.RESULTS.getSearchInfo().addAll(matchedResults);
-		Learner.RESULTS.initializeExampleType();
+//		for(int i=0;i<matchedResults.size();i++){
+//			if(!isAnOldRecord(matchedResults.get(i).methodName,matchedResults.get(i).classPath)){
+//				Learner.RESULTS.getSearchInfo().add(matchedResults.get(i));
+//			}
+//		}
+//		Learner.RESULTS.getSearchInfo().addAll(matchedResults);
+		isAnOldRecord();
+		Learner.RESULTS.extendExampleType();
 	}
 	
+	public void isAnOldRecord(){		
+		List<ResultInfo> localList = new ArrayList<ResultInfo>();
+		localList.addAll(matchedResults);
+		for(int i=0;i<Learner.RESULTS.searchInfo.size();i++){
+			for(int j=0;j<matchedResults.size();j++){
+				if(Learner.RESULTS.searchInfo.get(i).classPath.trim().equals(matchedResults.get(j).classPath)){
+					if(Learner.RESULTS.searchInfo.get(i).methodName.trim().equals(matchedResults.get(j).methodName)){
+						Learner.RESULTS.searchInfo.get(i).isIncluded = true;
+						Learner.RESULTS.searchInfo.get(i).isOld = true;
+						localList = removeRecord(matchedResults.get(i).classPath, matchedResults.get(i).methodName, localList);
+					}
+				}
+			}			
+		}
+		
+		Learner.RESULTS.searchInfo.addAll(localList);
+	}
+	
+	public List<ResultInfo> removeRecord(String classPath,String methodName,List<ResultInfo> list){
+		int i,index=-1;
+		for(i=0;i<list.size();i++){
+			if(list.get(i).classPath.equals(classPath) && list.get(i).methodName.equals(methodName)){
+				index = i;
+				break;
+			}
+		}
+	 if(i>-1){
+		 list.remove(index);
+	 }
+	 return list;
+	}
 	public void markOldRecords(){
 		for(int i=0;i<Learner.RESULTS.getSearchInfo().size();i++){
 			Learner.RESULTS.getSearchInfo().get(i).setOld(true);

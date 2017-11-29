@@ -146,7 +146,7 @@ public class ConvertToFactAction extends BaseCompareAction {
         System.out.println(matchedMethods);
         prolog.setGeneralisedPredicate(reducedPredicateList);
         
-        return new SearchResuts(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods);
+        return new SearchResuts(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods.subList(0, 5));
 	}
 	
 	public List<String> appendMethods(List<String> previousMethods,List<String> currentMethods){

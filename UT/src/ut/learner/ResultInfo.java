@@ -10,6 +10,7 @@ public class ResultInfo {
 	int length;
 	String query;
 	boolean isOld;
+	boolean isIncluded;
 	
 	public ResultInfo(String classPath, String className, String methodName,
 			int startLineNumber) {
@@ -66,6 +67,13 @@ public class ResultInfo {
 	}
 	public void setOld(boolean isOld) {
 		this.isOld = isOld;
-	}	
+	}
+	public boolean isIncluded() {
+		return isIncluded;
+	}
+	public void setIncluded(boolean isIncluded) {
+		this.isIncluded = isIncluded;
+	}
+	
 	
 }
