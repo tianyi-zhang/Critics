@@ -371,7 +371,7 @@
             id="org.eclipse.compare.internal.ConvertToFactAction"
             objectClass="org.eclipse.core.resources.IFile">
          <action
-               class="org.eclipse.compare.internal.ConvertToFactAction"
+               class="org.eclipse.compare.internal.search.ConvertToFactAction"
                enablesFor="1"
                id="convertToFacts"
                label="For Examples"
@@ -383,7 +383,7 @@
             id="org.eclipse.compare.convertfact"
             objectClass="org.eclipse.core.resources.IResource">
          <action
-               class="org.eclipse.compare.internal.FactGeneratorAction"
+               class="org.eclipse.compare.internal.search.FactGeneratorAction"
                id="convert"
                label="Generate"
                menubarPath="factConvert/convertwithgroup">

@@ -7,7 +7,9 @@ public class ResultInfo {
 	String methodName;
 	int startLineNumber;
 	int endLineNumber;
+	int length;
 	String query;
+	boolean isOld;
 	
 	public ResultInfo(String classPath, String className, String methodName,
 			int startLineNumber) {
@@ -41,7 +43,29 @@ public class ResultInfo {
 	public void setStartLineNumber(int startLineNumber) {
 		this.startLineNumber = startLineNumber;
 	}
-	
-	
+	public int getEndLineNumber() {
+		return endLineNumber;
+	}
+	public void setEndLineNumber(int endLineNumber) {
+		this.endLineNumber = endLineNumber;
+	}
+	public String getQuery() {
+		return query;
+	}
+	public void setQuery(String query) {
+		this.query = query;
+	}
+	public int getLength() {
+		return length;
+	}
+	public void setLength(int length) {
+		this.length = length;
+	}
+	public boolean isOld() {
+		return isOld;
+	}
+	public void setOld(boolean isOld) {
+		this.isOld = isOld;
+	}	
 	
 }

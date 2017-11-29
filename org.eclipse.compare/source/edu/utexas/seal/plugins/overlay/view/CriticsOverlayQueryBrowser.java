@@ -2,7 +2,7 @@ package edu.utexas.seal.plugins.overlay.view;
 
 
 
-import org.eclipse.compare.internal.ConvertToFactAction;
+import org.eclipse.compare.internal.search.ConvertToFactAction;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -33,6 +33,17 @@ public class CriticsOverlayQueryBrowser extends ViewPart {
 		builder.append("Generalised Query : "+Learner.queries.get(i));	
 		builder.append("\n");
 		text.setText(builder.toString());						
+	}
+	
+	public static void updateViewAfterUserSelection(String query){
+		String current = text.getText();
+		StringBuilder builder = new StringBuilder();
+		builder.append(current);
+		builder.append("\n");
+		builder.append("\n");
+		builder.append("After User Selection : "+query);	
+		builder.append("\n");
+		text.setText(builder.toString());
 	}
 	
 	@Override

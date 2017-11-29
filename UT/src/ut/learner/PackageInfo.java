@@ -29,14 +29,16 @@ public class PackageInfo {
 	        	ClassInfo classInfo = new ClassInfo();
 	        	classInfo.setClassName(info[0]);
 	        	classInfo.setMethods(new ArrayList<MethodInfo>());
-	        	classInfo.setPath(info[1]);
+	        	classInfo.setPath(info[1]);	        	
 	        	MethodInfo methodInfo = new MethodInfo(info[2],Integer.parseInt(info[3]));
 	        	classInfo.getMethods().add(methodInfo);
+	        	classInfo.setPartialPath(info[4]);
 	        	if(PackageInfo.classInfoMap.containsKey(info[0])){
 	        		PackageInfo.classInfoMap.get(info[0]).getMethods().add(methodInfo);
 	        	} else{
 	        		PackageInfo.classInfoMap.put(info[0], classInfo);
 	        	}
+	        	
 	        	
 	        }
 	    } catch (IOException e) {

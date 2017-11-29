@@ -35,6 +35,7 @@ Export-Package: edu.utexas.seal.plugins,
  org.eclipse.compare.internal;x-internal:=true,
  org.eclipse.compare.internal.merge;x-internal:=true,
  org.eclipse.compare.internal.patch;x-internal:=true,
+ org.eclipse.compare.internal.search,
  org.eclipse.compare.patch,
  org.eclipse.compare.structuremergeviewer
 Bundle-Version: 3.5.400.v20130514-1224

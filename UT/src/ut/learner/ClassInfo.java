@@ -7,6 +7,8 @@ public class ClassInfo {
 	
 	String className;
 	String path;
+	String partialPath;
+	
 	List<MethodInfo> methods;
 	
 	public ClassInfo() {
@@ -29,6 +31,12 @@ public class ClassInfo {
 	}
 	public void setPath(String path) {
 		this.path = path;
+	}
+	public String getPartialPath() {
+		return partialPath;
+	}
+	public void setPartialPath(String partialPath) {
+		this.partialPath = partialPath;
 	}
 		
 	

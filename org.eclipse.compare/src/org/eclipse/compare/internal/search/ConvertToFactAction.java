@@ -1,10 +1,11 @@
-package org.eclipse.compare.internal;
+package org.eclipse.compare.internal.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.compare.internal.BaseCompareAction;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -38,6 +39,7 @@ import ut.learner.Learner;
 import ut.learner.MatchedResult;
 import ut.learner.PackageInfo;
 import ut.learner.QueryProlog;
+import ut.learner.ResultInfo;
 import ut.learner.SearchResuts;
 import ut.seal.plugins.utils.UTFile;
 import ut.seal.plugins.utils.UTParseCallList;
@@ -54,12 +56,19 @@ public class ConvertToFactAction extends BaseCompareAction {
 	public static String methodName;
 	public static String className;
 	public String queryForSelection;
+	public List<String> originalPredicateList;
 	public static QueryProlog prolog = new QueryProlog();
 	
 	
 	@Override
 	protected void run(ISelection selection) {
 		// TODO Auto-generated method stub
+		originalPredicateList = new ArrayList<String>();
+		prolog = new QueryProlog();
+//		Learner.RESULTS.setSearchInfo(new ArrayList<ResultInfo>());
+//		Learner.queries = new ArrayList<String>();
+//		Learner.RESULTS.setExampleTypeToNUll();
+		
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null)
 	    {	        
@@ -67,6 +76,7 @@ public class ConvertToFactAction extends BaseCompareAction {
 			Object obj  = structuredSelection.getFirstElement();
 			IFile file  = (IFile) Platform.getAdapterManager().getAdapter(obj, IFile.class);			
 	        TextSelection s = (TextSelection) window.getSelectionService().getSelection();	
+	        System.out.println(s.getText());
 	        
 	        if(PackageInfo.classInfoMap.size()==0){
 	        	PackageInfo.readPackageInfo();
@@ -88,6 +98,7 @@ public class ConvertToFactAction extends BaseCompareAction {
 	        System.out.println(getQueryString(this.visitor.predicatesForMethod));
 	        
 	        Learner.RESULTS = generalisedQuery();
+	        Learner.orginalPredicateList = this.originalPredicateList;
 	        
 			CriticsOverlaySearchPredicate.updateViewer();
 			CriticsOverlayQueryBrowser.updateViewer();
@@ -111,26 +122,31 @@ public class ConvertToFactAction extends BaseCompareAction {
         List<String> reducedPredicateList = new ArrayList<String>();
         
         //get answers before dropping
-        List<String> matchedMethods = prolog.executeSelectedQuery(getQueryString(generalise.getFirstOrderPredicate()));     
+        List<ResultInfo> matchedMethods = prolog.executeSelectedQuery(getQueryString(generalise.getFirstOrderPredicate()),generalise.getFirstOrderPredicate());     
         Learner.queries.add(getQueryString(generalise.getFirstOrderPredicate()));
+        originalPredicateList.addAll(generalise.getFirstOrderPredicate());
         predicateList = generalise.dropTypes();        
+//        predicateList = generalise.getFirstOrderPredicate();
         reducedPredicateList.addAll(predicateList);
         Learner.queries.add(getQueryString(reducedPredicateList));
-        List<String> generalized= prolog.executeSelectedQuery(getQueryString(predicateList));
-        matchedMethods = appendMethods(matchedMethods, generalized);
+        List<ResultInfo> generalized= prolog.executeSelectedQuery(getQueryString(predicateList),reducedPredicateList);
+//        matchedMethods = appendMethods(matchedMethods, generalized);
+        matchedMethods.addAll(generalized);
         int reductionCounter = 1;
         while((predicateList.size()-reductionCounter)>2 && matchedMethods.size()<5){        	
         	reducedPredicateList = generalise.dropPredicates(predicateList, predicateList.size()-reductionCounter);
         	Learner.queries.add(getQueryString(reducedPredicateList));
-        	generalized = prolog.executeSelectedQuery(getQueryString(reducedPredicateList));
-        	matchedMethods = appendMethods(matchedMethods, generalized);
-        	reductionCounter = reductionCounter*2;
+        	generalized = prolog.executeSelectedQuery(getQueryString(reducedPredicateList),reducedPredicateList);
+//        	matchedMethods = appendMethods(matchedMethods, generalized);
+        	matchedMethods.addAll(generalized);
+        	reductionCounter = reductionCounter+1;
         }
         
         System.out.println("After generalisation");
         System.out.println(matchedMethods);
         prolog.setGeneralisedPredicate(reducedPredicateList);
-        return new SearchResuts(setCurrentMatchedMethods(matchedMethods),reducedPredicateList);
+        
+        return new SearchResuts(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods);
 	}
 	
 	public List<String> appendMethods(List<String> previousMethods,List<String> currentMethods){

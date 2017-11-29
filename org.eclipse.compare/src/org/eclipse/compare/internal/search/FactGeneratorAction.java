@@ -1,4 +1,4 @@
-package org.eclipse.compare.internal;
+package org.eclipse.compare.internal.search;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.compare.internal.BaseCompareAction;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -87,7 +88,8 @@ public class FactGeneratorAction extends BaseCompareAction{
 				ClassInfo info = new ClassInfo();
 				info.setClassName(visitor.className);
 				info.setMethods(visitor.methods);
-				info.setPath(res.getFullPath().toOSString());
+				info.setPartialPath(res.getFullPath().toOSString());
+				info.setPath(res.getRawLocation().toOSString());
 				
 				this.classInfoMap.put(visitor.className, info);
 				
@@ -125,10 +127,13 @@ public class FactGeneratorAction extends BaseCompareAction{
 			StringBuilder builder = new StringBuilder();
 			for(String key : PackageInfo.classInfoMap.keySet()){
 				String tmp = key+":"+PackageInfo.classInfoMap.get(key).getPath();
+				
 				List<MethodInfo> methods = PackageInfo.classInfoMap.get(key).getMethods();
 				for(int i=0;i<methods.size();i++){
 					String tmp2 = ":"+methods.get(i).getMethodName()+":"+ methods.get(i).getStartLineNumber();
 					builder.append(tmp+tmp2);
+					tmp2 = ":"+PackageInfo.classInfoMap.get(key).getPartialPath();
+					builder.append(tmp2);
 					builder.append("\n");	
 				}								
 			}

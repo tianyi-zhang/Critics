@@ -3,7 +3,7 @@ package ut.seal.plugins.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.compare.internal.ConvertToFactAction;
+//import org.eclipse.compare.internal.search.ConvertToFactAction;
 
 import ut.seal.plugins.utils.visitor.UTASTSearchTypeVisitor;
 
@@ -53,7 +53,7 @@ public class UTParseCallList {
 		if(paramChecked.size()>0){
 			for(int i=0;i<paramChecked.size();i++){				
 				builder.append("check_pre_cond(");
-				builder.append(ConvertToFactAction.methodName);
+//				builder.append(ConvertToFactAction.methodName);
 				builder.append(",");
 				builder.append(methodName);
 				builder.append(",");
@@ -110,7 +110,7 @@ public class UTParseCallList {
 			if(callStack.get(i).contains("Endif")){
 				if(isAssignment && isCheckIf && ifCheckParams.contains(varToCheck)){
 					builder.append("check_ret_value(");
-					builder.append(ConvertToFactAction.methodName);
+//					builder.append(ConvertToFactAction.methodName);
 					builder.append(",");
 					builder.append(methodName);
 					builder.append(")");

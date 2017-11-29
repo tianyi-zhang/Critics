@@ -10,11 +10,13 @@ public class SearchResuts {
 	List<ResultInfo> searchInfo;
 	Boolean[] exampleType;
 	
-	public SearchResuts(List<String> matchedMethods, List<String> predicateList) {
+	
+	public SearchResuts(List<String> matchedMethods, List<String> predicateList,List<ResultInfo> searchInfo) {
 		super();
 		this.matchedMethods = matchedMethods;
 		this.predicateList = predicateList;
-		this.searchInfo = this.populateSearchInfoObjects();
+		this.searchInfo = searchInfo;
+		initializeExampleType();
 		
 	}
 	public List<String> getMatchedMethods() {
@@ -49,13 +51,16 @@ public class SearchResuts {
 			}
 			
 		}
-		exampleType = new Boolean[results.size()];
-		for(int i=0;i<exampleType.length;i++){
-			exampleType[i] = false;
-		}
+		
 		return results;
 	}
 	
+	public void initializeExampleType(){
+		exampleType = new Boolean[searchInfo.size()];
+		for(int i=0;i<exampleType.length;i++){
+			exampleType[i] = false;
+		}
+	}
 	public List<ResultInfo> getSearchInfo() {
 		return searchInfo;
 	}
@@ -69,5 +74,9 @@ public class SearchResuts {
 	
 	public boolean getExampleTypeAtIndex(int index){
 		return this.exampleType[index];
+	}
+	
+	public void setExampleTypeToNUll(){
+		exampleType = null;
 	}
 }
