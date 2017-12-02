@@ -43,7 +43,6 @@ import ut.seal.plugins.utils.ast.UTASTNodeConverter;
 import ut.seal.plugins.utils.ast.UTASTNodeFinder;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.Node;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.NodeValueArg;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil;
 import static org.junit.Assert.assertEquals;
 
 /**

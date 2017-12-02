@@ -4,10 +4,28 @@
 
    <extension
          point="org.eclipse.ui.views">
-      <category
-            name="Example Category"
-            id="com.plugin.extendedview">
-      </category>
+      <view
+            class="edu.utexas.seal.plugins.overlay.view.CriticsOverlayNewView"
+            icon="icons/cat.png"
+            id="edu.utexas.seal.plugins.overlay.view.CriticsOverlayNewView"
+            name="Matching Result"
+            restorable="true">
+         >
+      </view>
+      <view
+            class="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView"
+            icon="icons/cat.png"
+            id="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView.OldRev"
+            name="Diff Template View (Old Rev.)"
+            restorable="true">
+      </view>
+      <view
+            class="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView"
+            icon="icons/cat.png"
+            id="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView.NewRev"
+            name="Diff Template View (New Rev.)"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -135,5 +153,65 @@
       <startup
             class="edu.utexas.seal.plugin.preprocess.UTCriticsPreprocessor"></startup>
    </extension>
-
+   <!--
+   ===================================================
+   		Critics select/find commands
+   ===================================================
+   -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="edu.utexas.seal.plugins.handler.CriticsSelectContext"
+            id="edu.utexas.seal.plugins.handler.CriticsSelectContext"
+            name="CriticsSelectContext">
+      </command>
+      <command
+            defaultHandler="edu.utexas.seal.plugins.handler.CriticsFindContext"
+            id="edu.utexas.seal.plugins.handler.CriticsFindContext"
+            name="CriticsFindContext">
+      </command>
+      <command
+            defaultHandler="edu.utexas.seal.plugins.handler.CriticsSelectCotextClass"
+            id="edu.utexas.seal.plugins.handler.CriticsSelectContextClassLevel"
+            name="CriticsSelectContextClassLevel">
+      </command>
+   </extension>
+   <!--
+   ===================================================
+   		Critics compare/merge commands
+   ===================================================
+   -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="edu.utexas.seal.plugins.CriticsCompareHandler"
+            id="org.eclipse.compare.commands.Critics"
+            name="CriticsTextSelect">
+      </command>
+            <command
+            defaultHandler="edu.utexas.seal.plugins.CriticsEnableHandler"
+            id="org.eclipse.jdt.ui.commands.CriticsEnable"
+            name="CriticsEnable">
+      </command>
+            <command
+                  defaultHandler="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
+                  id="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
+                  name="CriticsGeneralizeHandler">
+            </command>
+            <command
+                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
+                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
+                  name="CriticsSelectiveGeneralizeHandler">
+            </command>
+            <command
+                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
+                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
+                  name="CriticsSelectiveGeneralizeHandlerBegin">
+            </command>
+            <command
+                  defaultHandler="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+                  id="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+                  name="CriticsSelectiveGeneralizeHandlerBegin">
+            </command>
+   </extension>
 </plugin>

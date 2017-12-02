@@ -21,61 +21,6 @@
    <extension-point id="contentViewers" name="%contentViewers" schema="schema/contentViewers.exsd"/>
    <extension-point id="compareFilters" name="%compareFilters" schema="schema/compareFilters.exsd"/>
 
-<!-- Extensions -->
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="edu.utexas.seal.plugins.overlay.view.CriticsOverlayNewView"
-            icon="icons/cat.png"
-            id="edu.utexas.seal.plugins.overlay.view.CriticsOverlayNewView"
-            name="Matching Result"
-            restorable="true">            
-            >
-      </view>
-      <view
-            class="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView"
-            icon="icons/cat.png"
-            id="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView.OldRev"
-            name="Diff Template View (Old Rev.)"
-            restorable="true">
-      </view>
-      <view
-            class="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView"
-            icon="icons/cat.png"
-            id="edu.utexas.seal.plugins.treegraph.view.CriticsContextSelectionView.NewRev"
-            name="Diff Template View (New Rev.)"
-            restorable="true">
-      </view>
-      <view
-            class="edu.utexas.seal.plugins.overlay.TestCriticsOverlayView"
-            icon="icons/cat.png"
-            id="edu.utexas.seal.plugins.overlay.view.TestCriticsOverlayView"
-            name="Test Critics Overlay View">
-      </view>
-      <view
-            class="edu.utexas.seal.plugins.overlay.TestCriticsOverlayView2"
-            id="edu.utexas.seal.plugins.overlay.TestCriticsOverlayView2"
-            name="TestCriticsOverlayView2">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            defaultHandler="edu.utexas.seal.plugins.handler.CriticsSelectContext"
-            id="edu.utexas.seal.plugins.handler.CriticsSelectContext"
-            name="CriticsSelectContext">
-      </command>
-      <command
-            defaultHandler="edu.utexas.seal.plugins.handler.CriticsFindContext"
-            id="edu.utexas.seal.plugins.handler.CriticsFindContext"
-            name="CriticsFindContext">
-      </command>
-      <command
-            defaultHandler="edu.utexas.seal.plugins.handler.CriticsSelectCotextClass"
-            id="edu.utexas.seal.plugins.handler.CriticsSelectContextClassLevel"
-            name="CriticsSelectContextClassLevel">
-      </command>
-   </extension>
    <extension
          point="org.eclipse.ui.themes">
       <themeElementCategory
@@ -416,43 +361,5 @@
                type="org.eclipse.ui.IContributorResourceAdapter">
          </adapter>
       </factory>
-   </extension>
-   <!--
-   ===================================================
-   		Critics compare/merge commands
-   ===================================================
-   -->
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            defaultHandler="edu.utexas.seal.plugins.CriticsCompareHandler"
-            id="org.eclipse.compare.commands.Critics"
-            name="CriticsTextSelect">
-      </command>
-            <command
-            defaultHandler="edu.utexas.seal.plugins.CriticsEnableHandler"
-            id="org.eclipse.jdt.ui.commands.CriticsEnable"
-            name="CriticsEnable">
-      </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
-                  name="CriticsGeneralizeHandler">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
-                  name="CriticsSelectiveGeneralizeHandler">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
-                  name="CriticsSelectiveGeneralizeHandlerBegin">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
-                  id="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
-                  name="CriticsSelectiveGeneralizeHandlerBegin">
-            </command>
    </extension>
 </plugin>

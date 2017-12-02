@@ -98,8 +98,6 @@ import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.compare.ICompareContainer;
 
-import edu.utexas.seal.plugins.util.UTPlugin;
-
 /**
  * Wraps a JFace SourceViewer and add some convenience methods.
  */
@@ -115,6 +113,10 @@ public class MergeSourceViewer implements ISelectionChangedListener, ITextListen
 	public static final String	FIND_ID				= "find";			//$NON-NLS-1$
 	public static final String	GOTO_LINE_ID		= "gotoLine";		//$NON-NLS-1$
 	public static final String	CHANGE_ENCODING_ID	= "changeEncoding"; //$NON-NLS-1$
+	// copied from UTPlugin
+	public static final String	ID_TEXT_SELECTCON				= "selectContext";
+	public static final String	ITEM_TEXT_SELECTCON				= "Select Diff Region";
+	public static final String	ID_CMD_CRITICS_SELECT_CONTEXT	= "edu.utexas.seal.plugins.handler.CriticsSelectContext";
 
 	class TextOperationAction extends MergeViewerAction {
 
@@ -755,7 +757,7 @@ public class MergeSourceViewer implements ISelectionChangedListener, ITextListen
 		if (SELECT_ALL_ID.equals(actionId))
 			return new TextOperationAction(ITextOperationTarget.SELECT_ALL, IWorkbenchCommandConstants.EDIT_SELECT_ALL, false, false, false);
 		// mksong Dec 30, 2013 8:50:52 PM
-		if (UTPlugin.ID_TEXT_SELECTCON.equals(actionId)) {
+		if (ID_TEXT_SELECTCON.equals(actionId)) {
 			Action action = new Action() {
 				@Override
 				public void run() {
@@ -763,13 +765,13 @@ public class MergeSourceViewer implements ISelectionChangedListener, ITextListen
 							getActiveWorkbenchWindow().getPartService(). //
 							getActivePart().getSite().getService(IHandlerService.class);
 					try {
-						handlerService.executeCommand(UTPlugin.ID_CMD_CRITICS_SELECT_CONTEXT, null);
+						handlerService.executeCommand(ID_CMD_CRITICS_SELECT_CONTEXT, null);
 					} catch (ExecutionException | NotDefinedException | NotEnabledException | NotHandledException e1) {
 						e1.printStackTrace();
 					}
 				}
 			};
-			action.setText(UTPlugin.ITEM_TEXT_SELECTCON);
+			action.setText(ITEM_TEXT_SELECTCON);
 			return action;
 		}
 		return null;
@@ -825,7 +827,7 @@ public class MergeSourceViewer implements ISelectionChangedListener, ITextListen
 
 		// mksong Dec 30, 2013 8:19:03 PM
 		menu.add(new Separator("criticsSelectContext")); //$NON-NLS-1$
-		addMenu(menu, UTPlugin.ID_TEXT_SELECTCON);
+		addMenu(menu, ID_TEXT_SELECTCON);
 
 		menu.add(new Separator("edit")); //$NON-NLS-1$
 		addMenu(menu, CHANGE_ENCODING_ID);

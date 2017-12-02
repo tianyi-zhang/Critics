@@ -201,8 +201,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 
-import edu.utexas.seal.plugins.util.UTCriticsEnable;
-
 import com.ibm.icu.text.MessageFormat;
 
 import edu.utexas.seal.plugins.util.UTCriticsTextSelection;
@@ -4613,7 +4611,7 @@ public class TextMergeViewer extends ContentMergeViewer implements IAdaptable {
 		UTCriticsTextSelection.leftMergeSourceViewer = fLeft;
 		UTCriticsTextSelection.rightMergeSourceViewer = fRight;
 
-		if (diff != null && UTCriticsEnable.autoSelection) {
+		if (diff != null && false) {
 			UTCriticsTextSelection.leftDiffPosition = diff.getPosition(LEFT_CONTRIBUTOR);
 			UTCriticsTextSelection.rightDiffPosition = diff.getPosition(RIGHT_CONTRIBUTOR);
 

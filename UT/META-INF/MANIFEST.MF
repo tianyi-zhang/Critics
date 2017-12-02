@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.text,
  org.eclipse.core.resources,
- org.eclipse.jdt.core
+ org.eclipse.jdt.core;bundle-version="3.9.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: ch.uzh.ifi.seal.changedistiller;uses:="ch.uzh.ifi.seal.changedistiller.distilling,com.google.inject",
@@ -25,6 +25,9 @@ Export-Package: ch.uzh.ifi.seal.changedistiller;uses:="ch.uzh.ifi.seal.changedis
  ch.uzh.ifi.seal.changedistiller.treedifferencing;uses:="ch.uzh.ifi.seal.changedistiller.model.classifiers",
  ch.uzh.ifi.seal.changedistiller.util;uses:="org.eclipse.jdt.internal.compiler.ast,ch.uzh.ifi.seal.changedistiller.ast.java",
  com.google.inject,
+ edu.utexas.seal.plugins.ast.binding,
+ edu.utexas.seal.plugins.util.visitor,
+ org.apache.commons.exec,
  rted.datastructure,
  rted.datastructure.manager,
  rted.distance,
@@ -44,6 +47,7 @@ Export-Package: ch.uzh.ifi.seal.changedistiller;uses:="ch.uzh.ifi.seal.changedis
    com.google.inject",
  ut.seal.plugins.utils.change,
  ut.seal.plugins.utils.others,
+ ut.seal.plugins.utils.visitor,
  ut.seal.weka.cluster,
  weka.clusterers
 Bundle-ClassPath: lib/aopalliance-1.0.jar,
@@ -58,6 +62,3 @@ Bundle-ClassPath: lib/aopalliance-1.0.jar,
  lib/log4j-1.2.17.jar,
  lib/commons-lang3-3.2.1.jar,
  .
-Import-Package: edu.utexas.seal.plugins.ast.binding,
- edu.utexas.seal.plugins.util,
- edu.utexas.seal.plugins.util.visitor

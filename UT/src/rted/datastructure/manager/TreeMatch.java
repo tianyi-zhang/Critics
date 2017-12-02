@@ -41,12 +41,12 @@ import ch.uzh.ifi.seal.changedistiller.ast.java.JavaCompilation;
 import ch.uzh.ifi.seal.changedistiller.model.classifiers.java.JavaEntityType;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.Node;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.NodeValueArg;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil;
 import rted.datastructure.LblValueNode;
 import rted.distance.RTEDInfoSubTree;
 import rted.processor.RTEDProcessor;
 import rted.util.DistanceByLevenshtein;
 import ut.seal.plugins.utils.UTChange;
+import ut.seal.plugins.utils.UTCriticsDiffUtil;
 import ut.seal.plugins.utils.UTLog;
 import ut.seal.plugins.utils.UTStr;
 

@@ -39,7 +39,9 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 import rted.util.DistanceByLevenshtein;
 import ut.seal.plugins.utils.UTCfg;
+import ut.seal.plugins.utils.UTCriticsDiffUtil;
 import ut.seal.plugins.utils.UTStr;
+import ut.seal.plugins.utils.UTCriticsHTML.HTMLEntityType;
 import ut.seal.plugins.utils.ast.UTASTNodeExpressHandler;
 import ch.uzh.ifi.seal.changedistiller.model.classifiers.EntityType;
 import ch.uzh.ifi.seal.changedistiller.model.classifiers.java.JavaEntityType;
@@ -47,8 +49,6 @@ import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeEntity;
 import edu.utexas.seal.plugins.ast.binding.UTASTBindingManagerForStatement;
 import edu.utexas.seal.plugins.ast.binding.UTASTBindingManagerLocalVariable;
 import edu.utexas.seal.plugins.ast.binding.UTASTBindingManagerParameter;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil;
-import edu.utexas.seal.plugins.util.UTCriticsHTML.HTMLEntityType;
 import edu.utexas.seal.plugins.util.visitor.UTGeneralVisitor;
 import edu.utexas.seal.plugins.util.visitor.UTIGeneralVisitor;
 

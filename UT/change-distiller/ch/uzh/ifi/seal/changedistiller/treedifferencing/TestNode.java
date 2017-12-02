@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import ut.seal.plugins.utils.UTCriticsDiffUtil;
 import ut.seal.plugins.utils.UTStr;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil;
 
 /**
  * @author Myoungkyu Song

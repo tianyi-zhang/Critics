@@ -38,14 +38,13 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.swt.graphics.Point;
 import org.junit.Test;
 
+import ut.seal.plugins.utils.UTCriticsDiffUtil.Diff;
+import ut.seal.plugins.utils.UTCriticsDiffUtil.Operation;
 import ut.seal.plugins.utils.ast.UTASTNodeConverter;
 import ut.seal.plugins.utils.ast.UTASTNodeFinder;
 import ch.uzh.ifi.seal.changedistiller.model.classifiers.java.JavaEntityType;
 import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeChange;
 import ch.uzh.ifi.seal.changedistiller.treedifferencing.Node;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil.Diff;
-import edu.utexas.seal.plugins.util.UTCriticsDiffUtil.Operation;
 
 /**
  * The Class UTChange.
