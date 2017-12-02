@@ -5234,11 +5234,4 @@ SHA1-Digest: l9krJOxx9f9bp2q9nI3gkXTOlEc=
 
 Name: org/eclipse/jdt/internal/compiler/lookup/AnnotationHolder.class
 SHA1-Digest: G53plLC0knEPwz47a4rWVhy3VcE=
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
-Import-Package: ch.uzh.ifi.seal.changedistiller.ast.java
 
