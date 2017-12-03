@@ -66,3 +66,6 @@ Export-Package: edu.utexas.seal.plugin,
  edu.utexas.seal.plugins.ast.util,
  edu.utexas.seal.plugins.edit,
  edu.utexas.seal.plugins.treegraph.model
+Bundle-ClassPath: lib/hsqldb.jar,
+ .,
+ icons/

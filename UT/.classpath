@@ -15,7 +15,6 @@
 	<classpathentry kind="lib" path="lib/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="lib/commons-exec-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/java-cup.jar"/>
 	<classpathentry kind="lib" path="lib/JFlex.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1.jar"/>

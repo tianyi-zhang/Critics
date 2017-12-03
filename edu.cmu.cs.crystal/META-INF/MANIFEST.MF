@@ -27,5 +27,9 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-BuddyPolicy: registered
 Bundle-Vendor: Carnegie Mellon University
 Bundle-ClassPath: .,
- lib/grappa1_2.jar
+ lib/grappa1_2.jar,
+ lib/edu.cmu.cs.planno_1.1.5.jar,
+ schema/,
+ icons/,
+ dotFiles/
 
