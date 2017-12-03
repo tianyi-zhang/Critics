@@ -68,8 +68,8 @@ public class UTSubTreeCluster {
 			dataExtractedWithPostorderId.add(String.valueOf(postorderId) + "," + String.valueOf(simScore));
 			dataExtracted.add(String.valueOf(simScore));
 		}
-		String csvFile = UTCfg.getInst().readConfig().CSVFILENAME;
-		String arffFile = UTCfg.getInst().readConfig().ARFFFILENAME;
+		String csvFile = UTCfg.getInst().getConfig().CSVFILENAME;
+		String arffFile = UTCfg.getInst().getConfig().ARFFFILENAME;
 		UTFile.writeFile(csvFile, dataExtracted);
 		UTLog.println(true, "[DBG0] XMeans:");
 		clusterByXMeans(csvFile, arffFile, subTrees);
@@ -273,7 +273,7 @@ public class UTSubTreeCluster {
 						"  " + UTStr.getIndentR(node.getEntity().getSourceRange() + ", ", 10) + //
 						"(" + label + ")(" + value + ")");
 			}
-			int cnt = UTCfg.getInst().readConfig().CLUSTER_LIMIT_SIZE;
+			int cnt = UTCfg.getInst().getConfig().CLUSTER_LIMIT_SIZE;
 			if (id >= cnt) {
 				break;
 			}

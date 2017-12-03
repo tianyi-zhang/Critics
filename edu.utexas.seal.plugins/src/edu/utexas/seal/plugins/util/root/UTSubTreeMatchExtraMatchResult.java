@@ -173,7 +173,7 @@ public class UTSubTreeMatchExtraMatchResult {
 	 */
 	@Deprecated
 	public void computeSimilarityScore(List<RTEDInfoSubTree> subTrees) {
-		UTLog.init(UTCfg.getInst().readConfig().LOG4JPATH + "logResults_" + UTTime.curTime() + ".html");
+		UTLog.init(UTCfg.getInst().getConfig().LOG4JPATH + "logResults_" + UTTime.curTime() + ".html");
 		UTSubTreeMatch parm = new UTSubTreeMatch() {
 			@Override
 			public void callback(RTEDInfoSubTree t, String label, String value, int postorderId, //

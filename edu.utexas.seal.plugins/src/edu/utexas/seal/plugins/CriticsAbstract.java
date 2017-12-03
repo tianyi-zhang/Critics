@@ -108,7 +108,7 @@ public abstract class CriticsAbstract extends AbstractHandler {
 			return false;
 		}
 		$ = true;
-		UTLog.init(UTCfg.getInst().readConfig().LOG4JPATH + "logSubTrees_" + //
+		UTLog.init(UTCfg.getInst().getConfig().LOG4JPATH + "logSubTrees_" + //
 				UTTime.curTime() + ".html");
 		return true;
 	}

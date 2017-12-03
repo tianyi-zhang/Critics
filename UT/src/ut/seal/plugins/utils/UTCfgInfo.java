@@ -32,24 +32,27 @@ package ut.seal.plugins.utils;
  * @author Myoungkyu Song
  * @date Feb 1, 2014
  * @since J2SE-1.5 (Java SE 7 [1.7.0_40])
+ * @modified Tianyi
+ * @date Dec 2, 2017
  */
 public class UTCfgInfo {
 	private static UTCfgInfo	cfgInfo		= null;
 
-	public String				ARFFFILENAME;
-	public String				C_CONFIG_DR	= "UT.CONFIG";
-	public String				C_CONFIG_FL	= "config.txt";
-	public int					CLUSTER_LIMIT_SIZE;
-	public String				CSVFILENAME;
-	public String				IMG_EX_PATH;
-	public String				IMG_IN_PATH;
-	public String				INPUTDIRPATH;
-	public String				LOG4JPATH;
-	public String				LOG4JPROPERTIES;
+	// hardcode all these values instead of reading from UT.CONFIG/config.txt
 	public String				S			= System.getProperty("file.separator");
-	public int					SIMILARITY_THRESHOLD;
-	public String				TEXTDRAG_JS;
+	public int					CLUSTER_LIMIT_SIZE = 1;
+	public int					SIMILARITY_THRESHOLD = 1;
+	public String				ARFFFILENAME = "input" + S + "dataSimScoreJdtCore.arff";
+	public String				CSVFILENAME = "input" + S + "dataSimScoreJdtCore.csv";
+	public String				IMG_EX_PATH = "input" + S + "img" + S + "include.gif";
+	public String				IMG_IN_PATH = "input" + S + "img" + S + "exclude.gif";
+	public String				INPUTDIRPATH = "input" + S;
+	public String				LOG4JPATH = "log4j" + S;
+	public String				LOG4JPROPERTIES = "log4j.properties";
+	public String				TEXTDRAG_JS = "input" + S + "textDrag.js";
 	public String				WORKSPACE;
+	
+	private UTCfgInfo() {}
 
 	public static UTCfgInfo getInst() {
 		if (cfgInfo == null) {

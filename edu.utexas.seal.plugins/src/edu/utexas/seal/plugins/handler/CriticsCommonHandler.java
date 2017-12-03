@@ -191,7 +191,7 @@ public abstract class CriticsCommonHandler extends AbstractHandler {
 		clustererNewRev = new UTSubTreeCluster();
 		transformOldRev = new UTCriticsTransform(this);
 
-		UTLog.init(UTCfg.getInst().readConfig().LOG4JPATH + "logSubTrees_" + //
+		UTLog.init(UTCfg.getInst().getConfig().LOG4JPATH + "logSubTrees_" + //
 				UTTime.curTime() + ".html");
 
 		return true;

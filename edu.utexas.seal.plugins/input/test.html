@@ -1,0 +1,63 @@
+<head>
+<style>
+span.layerBase { color:#000000;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerInsert { color:#FF0040;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerDelete { color:#4B0082;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerParm { color:#298A08;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerSynCol { color:#A901DB;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerInsertBg { background-color:#EFEFFB;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerDeleteBg { background-color:#FBEFEF;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerMissBg { background-color:#F7FE2E;font-weight:bold;font-family:Monaco;font-size: 12px }
+span.layerRecommendBg { background-color:#81F79F;font-weight:bold;font-family:Monaco;font-size: 12px }
+</style>
+</head>
+<span class="layerBase">
+<span class="layerBase">
+int getExtendedEnd(ASTNode node)<br>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;<span class="layerSynCol">if </span> (this.trailingPtr&nbsp;&gt;=&nbsp;0)<br>
+</span>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[]&nbsp;range&nbsp;=&nbsp;null;<br>
+</span>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="layerSynCol">for </span> (int&nbsp;i&nbsp;=&nbsp;0;(range&nbsp;==&nbsp;null)&nbsp;&&&nbsp;(i&nbsp;&lt;=&nbsp;this.trailingPtr);&nbsp;i++)<br>
+</span>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="layerSynCol">if </span> (this.trailingNodes[i]&nbsp;==&nbsp;node)<br>
+</span>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range&nbsp;=&nbsp;this.trailingIndexes[i];<br>
+</span>
+</span>
+<span class="layerInsertBg">
+<span class="layerBase">
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bar();<br>
+</span>
+</span>
+<span class="layerDeleteBg">
+<span class="layerBase">
+-&nbsp;&nbsp;&nbsp;<span class="layerSynCol">if </span> (this.trailingComments&nbsp;!=&nbsp;null)<br>
+</span>
+</span>
+<span class="layerDeleteBg">
+<span class="layerBase">
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int[]&nbsp;range&nbsp;=&nbsp;(int[])&nbsp;this.trailingComments.get(node);<br>
+</span>
+</span>
+<span class="layerDeleteBg">
+<span class="layerBase">
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foo();<br>
+</span>
+</span>
+</span>

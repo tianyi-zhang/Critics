@@ -112,7 +112,7 @@ public class UTLogWithTimeStampUNUSED {
 	 * @param logFileName
 	 */
 	static public void init(String logFileName) {
-		PropertyConfigurator.configure(UTCfg.getInst().readConfig().LOG4JPROPERTIES);
+		PropertyConfigurator.configure(UTCfg.getInst().getConfig().LOG4JPROPERTIES);
 		Logger.getRootLogger().getLoggerRepository().resetConfiguration();
 		FileAppender fa = new FileAppender();
 		fa.setName("FileLogger");

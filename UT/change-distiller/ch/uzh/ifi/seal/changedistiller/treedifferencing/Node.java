@@ -722,7 +722,7 @@ public class Node extends DefaultMutableTreeNode {
 
 	public int getSimilarityThreshold() {
 		if (mSimilarityThreshold == -1) {
-			mSimilarityThreshold = UTCfg.getInst().readConfig().SIMILARITY_THRESHOLD;
+			mSimilarityThreshold = UTCfg.getInst().getConfig().SIMILARITY_THRESHOLD;
 		}
 		return mSimilarityThreshold;
 	}

@@ -96,7 +96,7 @@ public class CriticsCmdHandler extends AbstractHandler implements IHandler {
 	 * 
 	 */
 	void writeTmpFile() {
-		String dirPath = UTCfg.getInst().readConfig().INPUTDIRPATH;
+		String dirPath = UTCfg.getInst().getConfig().INPUTDIRPATH;
 		if (!(new File(dirPath).exists())) {
 			new File(dirPath).mkdir();
 		}

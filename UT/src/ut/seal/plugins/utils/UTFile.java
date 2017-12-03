@@ -594,6 +594,15 @@ public class UTFile {
 	 * @param buf the buf
 	 */
 	public static void write(String file, String buf) {
+		File f = new File(file);
+		if(!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(file, "UTF-8");

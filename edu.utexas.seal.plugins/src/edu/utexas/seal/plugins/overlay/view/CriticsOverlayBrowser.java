@@ -435,8 +435,9 @@ public class CriticsOverlayBrowser implements ICriticsHTMLKeyword {
 		}
 		// mHelper.new HTMLSpanGroup().startGroup(mLstSrcHtml);
 		String buf = getHtml();
-		String test_html = UTCfg.getInst().readConfig().INPUTDIRPATH + System.getProperty("file.separator") + "test.html";
-		UTFile.writeFile(test_html, mLstSrcHtml);
+//		String test_html = UTCfg.getInst().getConfig().INPUTDIRPATH + System.getProperty("file.separator") + "test.html";
+		System.out.println(System.getProperty("user.dir"));
+//		UTFile.writeFile(test_html, mLstSrcHtml);
 		System.out.println(buf);
 		mBrowser.setText(buf);
 	}
@@ -883,7 +884,7 @@ public class CriticsOverlayBrowser implements ICriticsHTMLKeyword {
 		lstHTML.add(HTML.T("data.append(buf);", 2));
 		lstHTML.add(HTML.T("...", 1));
 		lstHTML.add(HTML_SPAN_END);
-		String textdrag_JS = UTCfg.getInst().readConfig().TEXTDRAG_JS;
+		String textdrag_JS = UTCfg.getInst().getConfig().TEXTDRAG_JS;
 		String fileContents = UTFile.readFileWithNewLine(textdrag_JS);
 		lstHTML.add(fileContents);
 		lstHTML.add(HTML_END_BODY);

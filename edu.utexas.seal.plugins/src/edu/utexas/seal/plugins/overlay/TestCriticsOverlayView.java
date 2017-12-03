@@ -465,7 +465,7 @@ public class TestCriticsOverlayView extends ViewPart implements ICriticsHTMLKeyw
 		lstHTML.add(HTML.T("data.append(buf);", 2));
 		lstHTML.add(HTML.T("...", 1));
 		lstHTML.add(HTML_SPAN_END);
-		String textdrag_JS = UTCfg.getInst().readConfig().TEXTDRAG_JS;
+		String textdrag_JS = UTCfg.getInst().getConfig().TEXTDRAG_JS;
 		String fileContents = UTFile.readFileWithNewLine(textdrag_JS);
 		lstHTML.add(fileContents);
 		lstHTML.add(HTML_END_BODY);
