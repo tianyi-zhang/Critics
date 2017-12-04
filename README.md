@@ -2,7 +2,7 @@
 An Eclipse plug-in to search similar program changes and detect missing/inconsistent edits.
 
 ## Set up
-1. Install Subclipse ([instruction](http://web.mit.edu/6.005/www/fa10/labs/procedural_java/subclipse.html)) 
+1. Install Subclipse 1.8.x ([instruction](http://web.mit.edu/6.005/www/fa10/labs/procedural_java/subclipse.html)). It is recommended to use Subclipse 1.8.x instead of 1.6.x because Subclipse 1.6.x may introduce circular dependencies when exporting Critics as deployable plugin jars. 
 
 2. Install GEF Zest
 	- Copy all jar files in the gef-zest folder into your Eclipse plugins folder, e.g., /home/troy/eclipse-J2EE/plugins.
@@ -18,10 +18,18 @@ An Eclipse plug-in to search similar program changes and detect missing/inconsis
 **Notes:** 
 - Please do not install GEF Zest using the Eclipse Install New Software wizard. Critics depends on an old version of GEF Zest, which is no longer available in the GEF software site.
 - The setup instructions have been tested on Eclipse Kepler and Luna. If you are using other Eclipse versions, you may find some Eclipse plugin bundle issues, since some bundles thatCritics depends on may not be available in more recent Eclipse versions. Please email me (tianyi.zhang@cs.ucla.edu) with the Eclipse version you have trouble with.
+- **You need follow this setup instruction to install Subclipse and GEF Zest, no matter you install Critics from plugin jars or build Critics from the source code.**
 
-## Install Critics as an Eclipse plug-in
+## Install Critics from plugin jars
 
-Download the released plug-in jar. You can simply drop this jar file in the **dropin** folder in the Eclipse home directory and restart your Eclipse.
+Critics is exported to 6 deployable plugin jars in the plugin-jars folder in this repository. Critics customizes three existing plugins in Eclipse in order to capture user interaction with Eclipse UI components, e.g, user selections in Eclipse compare editor. However, different versions of Eclipse have different constraints on plugin versions. So far, Critics plugin jars only work with Eclipse Luna SR2 ([download](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/lunasr2)). If you want to install Critics plugin jars in other Eclipse versions, you either need to make sure they accept our customized plugin versions or have to modify the bundle versions in Critics's source code and export Critics to jars again.
+
+To install Critics from plugin jars, you need to (1) place org.eclipse.compare\_3.5.501.v20140817-1445.jar, org.eclipse.jdt.core\_3.10.2.v20150120-1634.jar, org.eclipse.jdt.ui\_3.10.2.v20141014-1419.jar in the eclipse/plugins folder to override the original plugins in Eclipse Luna SR2, and (2) place UT\_1.0.0.201712041123.jar, edu.cmu.cs.crystal\_3.4.2.jar, edu.utexas.seal.plugins\_1.0.0.201712041123.jar in the eclipse/dropins folder. Then add "-clean" in the first line of eclipse.ini and start your Eclipse.
+
+**Notes:**
+- If you want to cusomize Critics, installing Critics from plugin jars is not a good option. It will be inconvenient to update and test your customizations using plugin jars. Please read the next section and learn how to build and run Critics from source code. 
+- If you want to install Critics in other Eclipse versions, please read the deployment section in this tutorial.
+
 
 ## Run/Debug Critics from the source code
 
@@ -29,19 +37,15 @@ Download the released plug-in jar. You can simply drop this jar file in the **dr
 ```bash
 git clone https://github.com/tianyi-zhang/Critics.git
 ```
-2. Import the following eight projects into your Eclipse workspace as Java projects.
+2. Import the following six projects into your Eclipse workspace as Java projects.
 	- edu.cmu.cs.crystal includes the source code of the program analysis framework.
 	- edu.utexas.seal.plugins includes the source code of the Critics plugin.
 	- org.eclipse.compare includes the source code of the extended Eclipse Compare plugin.
 	- org.eclipse.jdt.core includes the source code of the extendded JDT Core plugin.
 	- org.eclipse.jdt.ui includes the source code of the JDT UI plugin that the JDT Core plugin depends on.
 	- UT includes the source code of the extended RTED tree matching algorithm and also the changedistiller algorithm.
-	- UT.INPUT includes the resource files such as icon images of Critics.
-	- UT.CONFIG includes the configuration file.
 
-3. Configure file paths in UT.CONFIG/config.txt.
-
-4. Launch a separate Eclipse application
+3. Launch a separate Eclipse application
 	- Click **Run > Run Configuration**.
 	- Double click **Eclipse Application** in the tree viewer to the left to create a new Eclipse Application launch configuration.
 	- Change the Eclipse Application configuration name and the workspace.
@@ -49,7 +53,7 @@ git clone https://github.com/tianyi-zhang/Critics.git
 
 ![run_configuration](tutorial/run_configuration.png?raw=true)
 
-5. Add Critics views to the current perspective
+4. Add Critics views to the current perspective
 	- Click **Windows > Show View -> Other**.
 	- Find and add **Diff Template View (New Rev.)**,  **Diff Template View (Old Rev.)**, and **Matching Result**.
 		- **Diff Template View (New Rev.)** shows the visualized abstract syntax tree of the new revision of the selected edits.
@@ -58,7 +62,7 @@ git clone https://github.com/tianyi-zhang/Critics.git
 
 ![add_critics_views](tutorial/add_view.png?raw=true)
 
-6. Re-arrange the Critics views via drag&drop
+5. Re-arrange the Critics views via drag&drop
 
 ![rearrange_critics_views](tutorial/rearrange_view.png?raw=true)
 
@@ -100,4 +104,34 @@ Critics identifies unchanged program statements that are dependent to the select
 
 ![summarize_similar_edits_and_detect_anomalies](tutorial/search_results.png?raw=true)
 
+## Deploy Critics as plugin jars
+
+To deploy Critics from source code to plugin jars, click **File > Export** and then select **Deployable Plugins and Fragments**. 
+
+![deploy_step1](tutorial/deploy_step1.png?raw=true)
+
+Click **Next**, choose the **Directory** option and specify the destination directory in the **destination** tab. 
+
+![deploy_step2](tutorial/deploy_step2.png?raw=true)
+
+There are two ways to deploy Critics to other Eclipse versions.
+
+**Option 1.** Modify the our customized plugin versions of the ones in your Eclipse so that your Eclipse will accept our customized plugins. This option is easy but risky because if there are major and critical differences between our customized plugin version and the original plugin version, your Eclipse may break at runtime.
+	- Step 1. Go to the plugins folder in your eclipse installation directory and figure out the versions of org.eclipse.compare, org.eclipse.jdt.ui, and org.eclipse.jdt.core.
+	- Step 2. For each of these three customized plugins, update the Bundle-Version entry in the MANIFEST.MF file to the corresponding version you just find in the previous step.
+	- Step 3. Export all 6 Critics projects again as plugin jars.
+
+**Option 2.** Reproduce our customization to the corresponding plugins in your Eclipse. This option involves many manual edits but is safe.
+	- Step 1. Fisrt, create a new workspace for finding out customization edits (we don't want to corrupt the existing workspace of Critics).
+	- Step 2. Import the three plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. Ignore any build errors since our goal is to find the customization edits instead of building them.
+	- Step 3. Import the source code of the original plugins that we initially edited. Do this by clicking **File > Import**, selecting **Plug-ins and Fragments**, choose the **Directory** option and  specify the folder where the initial plugins are. You can find the original plugins with source code in each of the plugin project folder, e.g, org.eclipse.jdt.core.source\_3.9.1.v20130905-0837.jar and org.eclipse.jdt.core\_3.9.1.v20130905-0837.jar in org.eclipse.jdt.core. Also select the **Select from all plug-ins and fragments found at the specific location** and the **Projects with source code** option. Click **Next**. Then select the plugin name and click **Add**. Click **Finish**.
+
+![import_plugin_source_step1](tutorial/import_plugin_source.png?raw=true)
+
+![import_plugin_source_step2](tutorial/import_plugin_source_2.png?raw=true)
+
+	- Step 4. Compare each pair of the initial and customized plugin projects and figure out the customization edits.
+	- Step 5. In the existing workspace of Critics, delete the plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. 
+	- Step 6. Import the three exising plugins from your Eclipse **plugins** folder following the same step in Step 3.
+	- Step 7. Manually port the customizatione edits you found in Step 4 to these plugin projects you just imported.
 
