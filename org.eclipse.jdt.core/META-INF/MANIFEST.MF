@@ -62,7 +62,7 @@ Export-Package: org.eclipse.jdt.core,org.eclipse.jdt.core.compiler,org
  lipse.jdt.internal.formatter.align;x-internal:=true,org.eclipse.jdt.i
  nternal.formatter.comment;x-internal:=true,org.eclipse.jdt.internal.f
  ormatter.old;x-internal:=true
-Bundle-Version: 3.9.1.v20130905-0837
+Bundle-Version: 3.10.2.v20150120-1634
 Build-Jdk: 1.7.0_25
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName

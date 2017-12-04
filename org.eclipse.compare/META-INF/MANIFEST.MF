@@ -18,8 +18,8 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ui.editors;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ui.forms;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.compare.core;bundle-version="[3.5.0,4.0.0)";visibility:=reexport,
- org.tigris.subversion.subclipse.core,
- org.tigris.subversion.subclipse.ui
+ org.tigris.subversion.subclipse.core;bundle-version="1.8.22",
+ org.tigris.subversion.subclipse.ui;bundle-version="1.8.21"
 Export-Package: edu.utexas.seal.plugins.util,
  org.eclipse.compare,
  org.eclipse.compare.contentmergeviewer,
@@ -28,7 +28,7 @@ Export-Package: edu.utexas.seal.plugins.util,
  org.eclipse.compare.internal.patch;x-internal:=true,
  org.eclipse.compare.patch,
  org.eclipse.compare.structuremergeviewer
-Bundle-Version: 3.5.400.v20130514-1224
+Bundle-Version: 3.5.501.v20140817-1445
 Build-Jdk: 1.7.0_11
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName

@@ -52,51 +52,6 @@
          <menu
                id="criticsMenu"
                label="Critics">
-<!--
-            <command
-                  commandId="org.eclipse.jdt.ui.commands.Critics"
-                  label="Compare With Local File History in Java Editor"
-                  style="push">
-            </command>
-            <command
-                  commandId="org.eclipse.compare.commands.Critics"
-                  label="Compare With Local File History in Compare Editor"
-                  style="push">
-            </command>
-            <separator
-                  name="org.eclipse.jdt.ui.separator1">
-            </separator>
-            <command
-                  commandId="org.eclipse.jdt.ui.commands.CriticsEnable"
-                  label="Auto Selection"
-                  style="toggle">
-            </command>
-            <command
-                  commandId="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
-                  label="Generate Diff Templates From Files"
-                  style="push">
-            </command>
-            <command
-                  commandId="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
-                  label="Begin/Generate Diff Templates From Selected Code Blocks"
-                  style="push">
-            </command>
-			<command
-                  commandId="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
-                  label="Recur/Generate Diff Templates From Selected Code Blocks"
-                  style="push">
-            </command>
-			<command
-                  commandId="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
-                  label="Match Tree Edit Distance With Selected Code Block"
-                  style="push">
-            </command>
-            <command
-                  commandId="edu.utexas.seal.plugins.CriticsInteractiveContextSelectionRunner"
-                  label="Test Interactive Context Selection View"
-                  style="push">
-            </command>
--->
             <command
                   commandId="edu.utexas.seal.plugins.handler.CriticsSelectContext"
                   label="Select Context Nodes - Method Level"
@@ -137,18 +92,6 @@
       </key>
    </extension>
    <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="false"
-            id="edu.utexas.seal.plugins.objectContribution1"
-            objectClass="edu.utexas.seal.plugins.Object1">
-         <menu
-               id="edu.utexas.seal.plugins.menu1"
-               label="My Label">
-         </menu>
-      </objectContribution>
-   </extension>
-   <extension
          point="org.eclipse.ui.startup">
       <startup
             class="edu.utexas.seal.plugin.preprocess.UTCriticsPreprocessor"></startup>
@@ -175,43 +118,40 @@
             id="edu.utexas.seal.plugins.handler.CriticsSelectContextClassLevel"
             name="CriticsSelectContextClassLevel">
       </command>
-   </extension>
-   <!--
-   ===================================================
-   		Critics compare/merge commands
-   ===================================================
-   -->
-   <extension
-         point="org.eclipse.ui.commands">
       <command
             defaultHandler="edu.utexas.seal.plugins.CriticsCompareHandler"
             id="org.eclipse.compare.commands.Critics"
             name="CriticsTextSelect">
       </command>
-            <command
+   <!--
+   ===================================================
+   		Critics compare/merge commands
+   ===================================================
+   -->
+      <command
             defaultHandler="edu.utexas.seal.plugins.CriticsEnableHandler"
             id="org.eclipse.jdt.ui.commands.CriticsEnable"
             name="CriticsEnable">
       </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
-                  name="CriticsGeneralizeHandler">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
-                  name="CriticsSelectiveGeneralizeHandler">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
-                  id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
-                  name="CriticsSelectiveGeneralizeHandlerBegin">
-            </command>
-            <command
-                  defaultHandler="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
-                  id="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
-                  name="CriticsSelectiveGeneralizeHandlerBegin">
-            </command>
+    <command
+          defaultHandler="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
+          id="edu.utexas.seal.plugins.CriticsGeneralizeHandler"
+          name="CriticsGeneralizeHandler">
+    </command>
+    <command
+          defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
+          id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerRecur"
+          name="CriticsSelectiveGeneralizeHandler">
+    </command>
+    <command
+          defaultHandler="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandler"
+          id="edu.utexas.seal.plugins.CriticsSelectiveGeneralizeHandlerBegin"
+          name="CriticsSelectiveGeneralizeHandlerBegin">
+    </command>
+    <command
+          defaultHandler="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+          id="edu.utexas.seal.plugins.CriticsMatchTreeEditDistance"
+          name="CriticsSelectiveGeneralizeHandlerBegin">
+    </command>
    </extension>
 </plugin>
