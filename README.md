@@ -27,7 +27,7 @@ Critics is exported to 6 deployable plugin jars in the plugin-jars folder in thi
 To install Critics from plugin jars, you need to (1) place org.eclipse.compare\_3.5.501.v20140817-1445.jar, org.eclipse.jdt.core\_3.10.2.v20150120-1634.jar, org.eclipse.jdt.ui\_3.10.2.v20141014-1419.jar in the eclipse/plugins folder to override the original plugins in Eclipse Luna SR2, and (2) place UT\_1.0.0.201712041123.jar, edu.cmu.cs.crystal\_3.4.2.jar, edu.utexas.seal.plugins\_1.0.0.201712041123.jar in the eclipse/dropins folder. Then add "-clean" in the first line of eclipse.ini and start your Eclipse.
 
 **Notes:**
-- If you want to cusomize Critics, installing Critics from plugin jars is not a good option. It will be inconvenient to update and test your customizations using plugin jars. Please read the next section and learn how to build and run Critics from source code. 
+- If you want to cusomize Critics, installing Critics from plugin jars is not a good option. Because it is inconvenient to update and test your customizations using plugin jars. Please read the next section and learn how to build and run Critics from source code. 
 - If you want to install Critics in other Eclipse versions, please read the deployment section in this tutorial.
 
 
@@ -106,32 +106,31 @@ Critics identifies unchanged program statements that are dependent to the select
 
 ## Deploy Critics as plugin jars
 
-To deploy Critics from source code to plugin jars, click **File > Export** and then select **Deployable Plugins and Fragments**. 
+To export Critics from source code to plugin jars, click **File > Export** and then select **Deployable plugins and fragments**. 
 
 ![deploy_step1](tutorial/deploy_step1.png?raw=true)
 
-Click **Next**, choose the **Directory** option and specify the destination directory in the **destination** tab. 
+Click **Next**, select all 6 plugins, choose the **Directory** option, and specify the destination directory in the **destination** tab. 
 
 ![deploy_step2](tutorial/deploy_step2.png?raw=true)
 
 There are two ways to deploy Critics to other Eclipse versions.
 
-**Option 1.** Modify the our customized plugin versions of the ones in your Eclipse so that your Eclipse will accept our customized plugins. This option is easy but risky because if there are major and critical differences between our customized plugin version and the original plugin version, your Eclipse may break at runtime.
-	- Step 1. Go to the plugins folder in your eclipse installation directory and figure out the versions of org.eclipse.compare, org.eclipse.jdt.ui, and org.eclipse.jdt.core.
-	- Step 2. For each of these three customized plugins, update the Bundle-Version entry in the MANIFEST.MF file to the corresponding version you just find in the previous step.
-	- Step 3. Export all 6 Critics projects again as plugin jars.
+**Option 1.** Modify our customized plugin versions as the ones in your own Eclipse so that your Eclipse will accept our customized plugins. This option is easy but risky because if there are major and critical differences between our customized plugin version and the original plugin version, your Eclipse may break at runtime.
+- Step 1. Go to the **plugins** folder in your eclipse installation directory and figure out the versions of org.eclipse.compare, org.eclipse.jdt.ui, and org.eclipse.jdt.core.
+- Step 2. For each of these three customized plugins, update the **Bundle-Version** entry in the MANIFEST.MF file to the corresponding version you just find in the previous step.
+- Step 3. Export all 6 Critics projects again as plugin jars.
 
-**Option 2.** Reproduce our customization to the corresponding plugins in your Eclipse. This option involves many manual edits but is safe.
-	- Step 1. Fisrt, create a new workspace for finding out customization edits (we don't want to corrupt the existing workspace of Critics).
-	- Step 2. Import the three plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. Ignore any build errors since our goal is to find the customization edits instead of building them.
-	- Step 3. Import the source code of the original plugins that we initially edited. Do this by clicking **File > Import**, selecting **Plug-ins and Fragments**, choose the **Directory** option and  specify the folder where the initial plugins are. You can find the original plugins with source code in each of the plugin project folder, e.g, org.eclipse.jdt.core.source\_3.9.1.v20130905-0837.jar and org.eclipse.jdt.core\_3.9.1.v20130905-0837.jar in org.eclipse.jdt.core. Also select the **Select from all plug-ins and fragments found at the specific location** and the **Projects with source code** option. Click **Next**. Then select the plugin name and click **Add**. Click **Finish**.
+**Option 2.** Port our customization to the corresponding plugins in your own Eclipse. This option involves many manual edits but is safe.
+- Step 1. Create a new workspace for finding out customization edits (we don't want to corrupt the existing workspace of Critics).
+- Step 2. Import the three plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. Ignore any build errors since our goal is to find the customization edits instead of building them.
+- Step 3. Import the source code of the original plugins that we initially edited. Do this by clicking **File > Import**, selecting **Plug-ins and Fragments**, choose the **Directory** option, and specify the folder where the initial plugins are (see screenshots below). You can find the original plugins with source code in each of the plugin project folder, e.g, org.eclipse.jdt.core.source\_3.9.1.v20130905-0837.jar and org.eclipse.jdt.core\_3.9.1.v20130905-0837.jar in org.eclipse.jdt.core. Also select the **Select from all plug-ins and fragments found at the specific location** and the **Projects with source code** option. Click **Next**. Then select the plugin name and click **Add** (see screenshots below). Click **Finish**.
+- Step 4. Compare each pair of the initial and customized plugin projects and figure out the customization edits.
+- Step 5. In the existing workspace of Critics, delete the plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. 
+- Step 6. Import the three exising plugins from your Eclipse **plugins** folder following the same step in Step 3.
+- Step 7. Manually port the customizatione edits you found in Step 4 to these plugin projects you just imported.
 
 ![import_plugin_source_step1](tutorial/import_plugin_source.png?raw=true)
 
 ![import_plugin_source_step2](tutorial/import_plugin_source_2.png?raw=true)
-
-	- Step 4. Compare each pair of the initial and customized plugin projects and figure out the customization edits.
-	- Step 5. In the existing workspace of Critics, delete the plugin projects we want to customize, org.eclipse.jdt.core, org.eclispe.jdt.ui, and org.eclipse.compare. 
-	- Step 6. Import the three exising plugins from your Eclipse **plugins** folder following the same step in Step 3.
-	- Step 7. Manually port the customizatione edits you found in Step 4 to these plugin projects you just imported.
 
