@@ -2,7 +2,7 @@
 An Eclipse plug-in to search similar program changes and detect missing/inconsistent edits.
 
 ## Set up
-1. Install Subclipse 1.8.x ([instruction](http://web.mit.edu/6.005/www/fa10/labs/procedural_java/subclipse.html)). It is recommended to use Subclipse 1.8.x instead of 1.6.x because Subclipse 1.6.x may introduce circular dependencies when exporting Critics as deployable plugin jars. 
+1. Install Subclipse 1.8.x ([instruction](https://devjack.de/how-to-install-subclipse-1-8-x-in-eclipse-luna/)). It is recommended to use Subclipse 1.8.x instead of 1.6.x because Subclipse 1.6.x may introduce circular dependencies when exporting Critics as deployable plugin jars. 
 
 2. Install GEF Zest
 	- Copy all jar files in the gef-zest folder into your Eclipse plugins folder, e.g., /home/troy/eclipse-J2EE/plugins.
