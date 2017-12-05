@@ -141,8 +141,7 @@ Export-Package: org.eclipse.jdt.internal.corext;x-friends:="org.eclipse.jdt.juni
  org.eclipse.jdt.ui.text.java,
  org.eclipse.jdt.ui.text.java.correction,
  org.eclipse.jdt.ui.text.java.hover,
- org.eclipse.jdt.ui.wizards,
- ut.seal.plugins.util
+ org.eclipse.jdt.ui.wizards
 Build-Jdk: 1.7.0_11
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
