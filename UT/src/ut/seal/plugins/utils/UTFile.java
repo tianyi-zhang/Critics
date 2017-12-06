@@ -192,6 +192,7 @@ public class UTFile {
 	 * @param end the end
 	 * @return the string
 	 */
+	@Deprecated
 	public String readReverseByToken(File file, String token, String bgn, String end) {
 		BufferedReader in = null;
 		String result = null;

@@ -30,6 +30,8 @@ package ut.seal.plugins.utils;
 
 import java.io.File;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+
 /**
  * @author Myoungkyu Song
  * @date Oct 22, 2013
@@ -56,25 +58,25 @@ public class UTCfg {
 		}
 		File eclipseLogPath = org.eclipse.core.runtime.Platform.getLogFileLocation().toFile();
 		if (eclipseLogPath.exists()) {
-			cfgInfo.WORKSPACE = cfg.getWorkDir();
+			cfgInfo.WORKSPACE = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + File.separator;
 			if (cfgInfo.WORKSPACE == null)
 				throw new RuntimeException("CAN NOT FIND ECLIPSE LOG.");
 		}
 		return cfg;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public String getWorkDir() {
-		File eclipseLogPath = org.eclipse.core.runtime.Platform.getLogFileLocation().toFile();
-		if (eclipseLogPath.exists()) {
-			UTFile utFile = new UTFile();
-			return utFile.readReverseByToken(eclipseLogPath, "-dev", "/", ".metadata");
-		}
-		return null;
-	}
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public String getWorkDir() {
+//		File eclipseLogPath = org.eclipse.core.runtime.Platform.getLogFileLocation().toFile();
+//		if (eclipseLogPath.exists()) {
+//			UTFile utFile = new UTFile();
+//			return utFile.readReverseByToken(eclipseLogPath, "-dev", "/", ".metadata");
+//		}
+//		return null;
+//	}
 	
 	public UTCfgInfo getConfig() {
 		return cfgInfo;
