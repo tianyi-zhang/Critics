@@ -65,9 +65,6 @@ public class ConvertToFactAction extends BaseCompareAction {
 		// TODO Auto-generated method stub
 		originalPredicateList = new ArrayList<String>();
 		prolog = new QueryProlog();
-//		Learner.RESULTS.setSearchInfo(new ArrayList<ResultInfo>());
-//		Learner.queries = new ArrayList<String>();
-//		Learner.RESULTS.setExampleTypeToNUll();
 		
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null)
