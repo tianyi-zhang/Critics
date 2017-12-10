@@ -35,8 +35,10 @@ import org.eclipse.ui.PlatformUI;
 import edu.utexas.seal.plugins.overlay.view.CriticsOverlayQueryBrowser;
 import edu.utexas.seal.plugins.overlay.view.CriticsOverlaySearchPredicate;
 import ut.learner.ClauseGeneralizer;
+import ut.learner.HornClause;
 import ut.learner.Learner;
 import ut.learner.MatchedResult;
+import ut.learner.Node;
 import ut.learner.PackageInfo;
 import ut.learner.QueryProlog;
 import ut.learner.ResultInfo;
@@ -58,6 +60,7 @@ public class ConvertToFactAction extends BaseCompareAction {
 	public String queryForSelection;
 	public List<String> originalPredicateList;
 	public static QueryProlog prolog = new QueryProlog();
+	HornClause userSelectedClause = new HornClause();
 	
 	
 	@Override
@@ -94,16 +97,27 @@ public class ConvertToFactAction extends BaseCompareAction {
 	        System.out.println("The query is ");
 	        System.out.println(getQueryString(this.visitor.predicatesForMethod));
 	        
-	        Learner.RESULTS = generalisedQuery();
-	        Learner.orginalPredicateList = this.originalPredicateList;
+	        userSelectedClause.setPredicates(visitor.predicates);
 	        
-			CriticsOverlaySearchPredicate.updateViewer();
-			CriticsOverlayQueryBrowser.updateViewer();
+	        generateLattice();
+	        
+//	        Learner.RESULTS = generalisedQuery();
+//	        Learner.orginalPredicateList = this.originalPredicateList;
+//	        
+//			CriticsOverlaySearchPredicate.updateViewer();
+//			CriticsOverlayQueryBrowser.updateViewer();
 	    }				
 
 	}
 	
+	
+	public void generateLattice(){
+//		Lattice children = LatticeUtil.getChildren("root",userSelectedClause, userSelectedClause.getPredicates().size()-2);
+		Node lattice = LatticeUtil.getChildren(userSelectedClause);
+	}
+	
 	public SearchResuts generalisedQuery(){
+		
 		Learner.queries = new ArrayList<String>();
 		ClauseGeneralizer generalise = new ClauseGeneralizer(this.visitor.predicatesForMethod);
         generalise.constructFirstOrderPredicates();

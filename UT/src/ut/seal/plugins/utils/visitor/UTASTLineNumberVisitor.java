@@ -8,8 +8,6 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-import sun.security.util.Length;
-
 public class UTASTLineNumberVisitor extends ASTVisitor{
 
 	String startPredicate;

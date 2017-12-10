@@ -22,11 +22,16 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
+import ut.learner.Constant;
+import ut.learner.Predicate;
+import ut.learner.PredicateValue;
+
 public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 
 	
 	public StringBuilder builder = new StringBuilder();
 	public List<String> predicatesForMethod = new ArrayList<>();
+	public List<Predicate> predicates = new ArrayList<Predicate>();
 	String methodName = null;
 	String className = null;
 	HashMap<String, String> variableTypes = new HashMap<>();
@@ -97,7 +102,19 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 				builder.append(replacingBrackets);
 				builder.append(")");
 //				builder.append("\n");
-				predicatesForMethod.add(builder.toString().toLowerCase());
+				if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+					predicatesForMethod.add(builder.toString().toLowerCase());
+					
+					Predicate pred = new Predicate();
+					pred.setName("containstype");
+					List<PredicateValue> values = new ArrayList<PredicateValue>();
+					Constant arg = new Constant(this.methodName.toLowerCase());
+					values.add(arg);
+					arg = new Constant(replacingBrackets);
+					values.add(arg);
+					pred.setArguments(values);
+					predicates.add(pred);
+				}
 				builder = new StringBuilder();
 			}
 		}
@@ -114,7 +131,19 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 		builder.append(this.methodName.toLowerCase());
 		builder.append(")");
 //		builder.append("\n");
-		predicatesForMethod.add(builder.toString().toLowerCase());
+		if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+			predicatesForMethod.add(builder.toString().toLowerCase());
+			
+			Predicate pred = new Predicate();
+			pred.setName("containsif");
+			List<PredicateValue> values = new ArrayList<PredicateValue>();
+			Constant arg = new Constant(this.methodName.toLowerCase());
+			values.add(arg);		
+			pred.setArguments(values);
+			predicates.add(pred);
+		}
+		
+		
 		builder = new StringBuilder();
 		}
 		return true;
@@ -129,7 +158,20 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 			builder.append(node.getName().getFullyQualifiedName().toLowerCase());	
 			builder.append(")");
 //			builder.append("\n");
-			predicatesForMethod.add(builder.toString().toLowerCase());
+			if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+				predicatesForMethod.add(builder.toString().toLowerCase());
+				
+				Predicate pred = new Predicate();
+				pred.setName("methodcall");
+				List<PredicateValue> values = new ArrayList<PredicateValue>();
+				Constant arg = new Constant(this.methodName.toLowerCase());
+				values.add(arg);
+				arg = new Constant(node.getName().getFullyQualifiedName().toLowerCase());
+				values.add(arg);
+				pred.setArguments(values);
+				predicates.add(pred);
+			}
+			
 			builder = new StringBuilder();
 		}
 		
@@ -148,7 +190,19 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 		builder.append(this.methodName.toLowerCase());
 		builder.append(")");
 //		builder.append("\n");
-		predicatesForMethod.add(builder.toString().toLowerCase());
+		
+		if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+			predicatesForMethod.add(builder.toString().toLowerCase());
+			
+			Predicate pred = new Predicate();
+			pred.setName("containsiterator");
+			List<PredicateValue> values = new ArrayList<PredicateValue>();
+			Constant arg = new Constant(this.methodName.toLowerCase());
+			values.add(arg);		
+			pred.setArguments(values);
+			predicates.add(pred);
+		}
+		
 		builder = new StringBuilder();
 		}
 		return true;
@@ -160,7 +214,17 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 		builder.append(this.methodName.toLowerCase());
 		builder.append(")");
 //		builder.append("\n");
-		predicatesForMethod.add(builder.toString().toLowerCase());
+		if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+			predicatesForMethod.add(builder.toString().toLowerCase());
+			
+			Predicate pred = new Predicate();
+			pred.setName("containsiterator");
+			List<PredicateValue> values = new ArrayList<PredicateValue>();
+			Constant arg = new Constant(this.methodName.toLowerCase());
+			values.add(arg);		
+			pred.setArguments(values);
+			predicates.add(pred);
+		}
 		builder = new StringBuilder();
 		}
 		return true;
@@ -182,7 +246,19 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 		builder.append(",");
 		builder.append(node.getException().getType().toString().toLowerCase());
 		builder.append(")");
-		predicatesForMethod.add(builder.toString().toLowerCase());
+		if(!predicatesForMethod.contains(builder.toString().toLowerCase())){
+			predicatesForMethod.add(builder.toString().toLowerCase());
+			
+			Predicate pred = new Predicate();
+			pred.setName("catch");
+			List<PredicateValue> values = new ArrayList<PredicateValue>();
+			Constant arg = new Constant(this.methodName.toLowerCase());
+			values.add(arg);		
+			arg = new Constant(node.getException().getType().toString().toLowerCase());
+			values.add(arg);
+			pred.setArguments(values);
+			predicates.add(pred);
+		}
 		builder = new StringBuilder();
 		}
 		return true;
