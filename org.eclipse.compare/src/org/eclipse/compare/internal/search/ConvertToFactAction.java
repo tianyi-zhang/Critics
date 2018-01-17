@@ -1,5 +1,6 @@
 package org.eclipse.compare.internal.search;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,7 @@ import ut.learner.Node;
 import ut.learner.PackageInfo;
 import ut.learner.QueryProlog;
 import ut.learner.ResultInfo;
-import ut.learner.SearchResuts;
+import ut.learner.SearchResults;
 import ut.seal.plugins.utils.UTFile;
 import ut.seal.plugins.utils.UTParseCallList;
 import ut.seal.plugins.utils.ast.UTASTNodeFinder;
@@ -61,7 +62,9 @@ public class ConvertToFactAction extends BaseCompareAction {
 	public List<String> originalPredicateList;
 	public static QueryProlog prolog = new QueryProlog();
 	HornClause userSelectedClause = new HornClause();
-	
+	public static Node<HornClause> lattice;
+	public SearchResults results;
+	boolean useRandomBias = false;
 	
 	@Override
 	protected void run(ISelection selection) {
@@ -98,25 +101,167 @@ public class ConvertToFactAction extends BaseCompareAction {
 	        System.out.println(getQueryString(this.visitor.predicatesForMethod));
 	        
 	        userSelectedClause.setPredicates(visitor.predicates);
+	        userSelectedClause.setPredicatesAsString(visitor.predicatesForMethod);
 	        
-	        generateLattice();
+	        results = new SearchResults(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<ResultInfo>());
+
+	        if(!prolog.isHasConsulted()){
+	        	prolog.consultFactBase();
+	        }
+//	        generateLattice();
+	        generaliseSelectedExample();
+//	        generalisedQuery();
 	        
+	        Learner.RESULTS = this.results;
 //	        Learner.RESULTS = generalisedQuery();
-//	        Learner.orginalPredicateList = this.originalPredicateList;
+	        Learner.orginalPredicateList = this.originalPredicateList;
 //	        
-//			CriticsOverlaySearchPredicate.updateViewer();
+			CriticsOverlaySearchPredicate.updateViewer();
 //			CriticsOverlayQueryBrowser.updateViewer();
 	    }				
 
 	}
 	
 	
+	
+	
 	public void generateLattice(){
 //		Lattice children = LatticeUtil.getChildren("root",userSelectedClause, userSelectedClause.getPredicates().size()-2);
-		Node lattice = LatticeUtil.getChildren(userSelectedClause);
+		LatticeUtil.lastCount = userSelectedClause.predicates.size()-6;		
+		lattice = LatticeUtil.getChildren(userSelectedClause);	
+	}
+		
+	public List<String> dropPrimitiveTypes(){
+		ClauseGeneralizer generalise = new ClauseGeneralizer(userSelectedClause.predicatesAsString);
+        generalise.constructFirstOrderPredicates();
+        List<String> droppedClause = generalise.dropTypes();
+        return droppedClause;
 	}
 	
-	public SearchResuts generalisedQuery(){
+	public List<String> generaliseForRandomBias(List<String> droppedClause){
+		System.out.println("This is based on random bias ");
+		RandomBias bias = new RandomBias();			        
+        BigInteger noOfCombinations = LatticeUtil.combinationNumber(droppedClause.size(), droppedClause.size()-1);
+		System.out.println("N C R "+ droppedClause.size()+" : "+(droppedClause.size()-1));
+		System.out.println("Total combinations is "+noOfCombinations.intValue());
+		bias.noOfHornClauses = noOfCombinations.intValue();
+		bias.ChooseSeedHornClause();
+		List<List<String>> combinationPredicates = new ArrayList<List<String>>();
+		//	    LatticeUtil.combinationsAsArray(combinationPredicates,userSelectedClause.predicatesAsString, new ArrayList<String>(), 0, userSelectedClause.predicatesAsString.size()-1, 0, userSelectedClause.predicatesAsString.size()-1);
+		LatticeUtil.combinationsAsArray(combinationPredicates,droppedClause, new ArrayList<String>(), 0, droppedClause.size()-1, 0, droppedClause.size()-1);
+			    
+		return combinationPredicates.get(bias.ints[0]);
+	}
+	
+	public List<String> generaliseForMethodBias(List<String> droppedClause){
+		MethodBias bias = new MethodBias();
+		BigInteger noOfCombinations = LatticeUtil.combinationNumber(droppedClause.size(), droppedClause.size()-1);
+		System.out.println("N C R "+ droppedClause.size()+" : "+(droppedClause.size()-1));
+		System.out.println("Total combinations is "+noOfCombinations.intValue());
+		List<List<String>> combinationPredicates = new ArrayList<List<String>>();		
+		LatticeUtil.combinationsAsArray(combinationPredicates,droppedClause, new ArrayList<String>(), 0, droppedClause.size()-1, 0, droppedClause.size()-1);
+		bias.allQuerries.addAll(combinationPredicates);
+		bias.ChooseSeedHornClause();
+		return combinationPredicates.get(bias.maxIndex);
+	}
+	
+	public void generaliseSelectedExample(){
+		
+		List<String> droppedClause = dropPrimitiveTypes();
+		
+		int count=1;
+		while(results.getMatchedMethods().size()<2){	
+			System.out.println("Iteration "+count);
+			
+	        
+			//get the array with the 23 choose 22 //save original 				
+//			List<List<String>> combinationPredicates = new ArrayList<List<String>>();
+//	//	    LatticeUtil.combinationsAsArray(combinationPredicates,userSelectedClause.predicatesAsString, new ArrayList<String>(), 0, userSelectedClause.predicatesAsString.size()-1, 0, userSelectedClause.predicatesAsString.size()-1);
+//			 LatticeUtil.combinationsAsArray(combinationPredicates,droppedClause, new ArrayList<String>(), 0, droppedClause.size()-1, 0, droppedClause.size()-1);
+//		    
+		    //You get a list of predicates and based on the random nos 
+//		    List<List<String>> chosenQueries =new ArrayList<List<String>>();
+//		    for(int i=0;i<bias.getInts().length;i++){ 
+//		    	System.out.println("Bias No "+bias.ints[i]);
+//		    	chosenQueries.add(combinationPredicates.get(bias.ints[i]));
+//		    }
+			 List<String> chosenQuery = new ArrayList<String>();
+			 if(useRandomBias){
+				 chosenQuery.addAll(generaliseForRandomBias(droppedClause));
+			 }else{
+				 chosenQuery.addAll(generaliseForMethodBias(droppedClause));
+			 }
+	         generateResultsForList(chosenQuery);
+	         droppedClause.clear();	
+	         droppedClause.addAll(chosenQuery);
+	         count++;
+	         System.out.println();
+		}
+        		
+	}
+	
+	public void generateResultsForList(List<String> chosenQueries){	
+		Learner.queries = new ArrayList<String>();
+		Learner.chosenqueries = new ArrayList<List<String>>();
+		
+//		for(int i=0;i<chosenQueries.size();i++){			
+//			ClauseGeneralizer generalise = new ClauseGeneralizer(chosenQueries.get(i));
+//	        generalise.constructFirstOrderPredicates();
+////	        generalise.dropTypes();
+//	        System.out.println("");
+//			System.out.println("Query "+i);
+////			System.out.println(getQueryString(chosenQueries.get(i)));
+//			System.out.println(getQueryString(generalise.getFirstOrderPredicate()));
+//			System.out.println("");
+//		}
+//		
+		
+		ClauseGeneralizer generalise = new ClauseGeneralizer(chosenQueries);
+        generalise.constructFirstOrderPredicates();
+		
+        
+        System.out.println("The chosen query is ");
+        System.out.println(getQueryString(generalise.getFirstOrderPredicate()));                       
+        
+//        prolog.setOrginalPredicateList(Arrays.asList(userSelectedClause.getClauseAsStringWithDelimiter().split(".")));
+//        
+//        System.out.println(userSelectedClause.getClauseAsString());
+////        
+////        List<String> predicateList = new ArrayList<String>();
+////        List<String> reducedPredicateList = new ArrayList<String>();
+////
+         List<ResultInfo> matchedMethods = prolog.executeSelectedQuery(getQueryString(chosenQueries),chosenQueries);             
+         results.getSearchInfo().addAll(matchedMethods);
+         results.getMatchedMethods().clear();
+         results.getMatchedMethods().addAll(prolog.getMatchedSolutions());
+////        //get answers before dropping
+////        Learner.queries.add(getQueryString(generalise.getFirstOrderPredicate()));
+////        originalPredicateList.addAll(generalise.getFirstOrderPredicate());
+////        predicateList = generalise.dropTypes();        
+//////        predicateList = generalise.getFirstOrderPredicate();
+////        reducedPredicateList.addAll(predicateList);
+////        Learner.queries.add(getQueryString(reducedPredicateList));
+////        List<ResultInfo> generalized= prolog.executeSelectedQuery(getQueryString(predicateList),reducedPredicateList);
+//////        matchedMethods = appendMethods(matchedMethods, generalized);
+////        matchedMethods.addAll(generalized);
+////        int reductionCounter = 1;
+////        while((predicateList.size()-reductionCounter)>2 && matchedMethods.size()<5){        	
+////        	reducedPredicateList = generalise.dropPredicates(predicateList, predicateList.size()-reductionCounter);
+////        	Learner.queries.add(getQueryString(reducedPredicateList));
+////        	generalized = prolog.executeSelectedQuery(getQueryString(reducedPredicateList),reducedPredicateList);
+//////        	matchedMethods = appendMethods(matchedMethods, generalized);
+////        	matchedMethods.addAll(generalized);
+////        	reductionCounter = reductionCounter+1;
+////        }
+////        
+////        System.out.println("After generalisation");
+////        System.out.println(matchedMethods);
+////        prolog.setGeneralisedPredicate(reducedPredicateList);
+////        
+////        return new SearchResults(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods.subList(0, 5));
+//		return null;
+	}
+	public SearchResults generalisedQuery(){
 		
 		Learner.queries = new ArrayList<String>();
 		ClauseGeneralizer generalise = new ClauseGeneralizer(this.visitor.predicatesForMethod);
@@ -156,8 +301,12 @@ public class ConvertToFactAction extends BaseCompareAction {
         System.out.println("After generalisation");
         System.out.println(matchedMethods);
         prolog.setGeneralisedPredicate(reducedPredicateList);
+        if(matchedMethods.size()>5){
+        	return new SearchResults(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods.subList(0, 5));
+        } else{
+        	return new SearchResults(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods);
+        }
         
-        return new SearchResuts(prolog.getMatchedSolutions(),reducedPredicateList,matchedMethods.subList(0, 5));
 	}
 	
 	public List<String> appendMethods(List<String> previousMethods,List<String> currentMethods){

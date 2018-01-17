@@ -265,7 +265,8 @@ public class UTASTQueryGeneratorVisitor extends ASTVisitor{
 	}
 	
 	public boolean visit(MethodDeclaration node){		
-		this.methodName = this.className+":"+node.getName().getFullyQualifiedName().toLowerCase();
+//		this.methodName = this.className+":"+node.getName().getFullyQualifiedName().toLowerCase();
+		this.methodName = "X";
 		return true;
 	}
 	

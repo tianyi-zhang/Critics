@@ -7,9 +7,14 @@ public class ClauseGeneralizer {
 
 	List<String> predicates;
 	List<String> firstOrderPredicate;
+	List<Predicate> predicateObjects;
+	List<Predicate> firstOrderPredicateObjects;
 	String methodVariableName;
 	String variableVarName;
 
+	enum PrimitiveTypes{
+		INT,STRING,CHAR,BOOLEAN,LONG,FLOAT,DOUBLE;
+	}
 	public ClauseGeneralizer(List<String> predicates) {
 		super();
 		this.predicates = predicates;
@@ -28,6 +33,30 @@ public class ClauseGeneralizer {
 	}
 
 	public void constructFirstOrderPredicates(){
+		for(int i=0;i<predicates.size();i++){
+			if(predicates.get(i).contains("methodcall(")){
+				constructVariableForMethodCall(predicates.get(i));
+			} else{
+				if(predicates.get(i).contains("containstype(")){
+					constructVariableForVariableNameInType(predicates.get(i));
+				} else{
+					if(predicates.get(i).contains("containsiterator(")){
+						constructVariableForIterator(predicates.get(i));
+					} else{
+						if(predicates.get(i).contains("containsif(")){
+							constructVariableForIfCondition(predicates.get(i));
+						} else{
+							if(predicates.get(i).contains("catch(")){
+								constructVariableForCatch(predicates.get(i));
+							} 
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void constructFirstOrderPredicateObjects(){
 		for(int i=0;i<predicates.size();i++){
 			if(predicates.get(i).contains("methodcall(")){
 				constructVariableForMethodCall(predicates.get(i));
@@ -109,10 +138,21 @@ public class ClauseGeneralizer {
 	public List<String> dropTypes(){
 		List<String> droppedTypePredicate = new ArrayList<>();
 		for(int i=0;i<firstOrderPredicate.size();i++){
-			if(!firstOrderPredicate.get(i).contains("containstype(")){
+			if(!firstOrderPredicate.get(i).contains("containstype(")){				
 				droppedTypePredicate.add(firstOrderPredicate.get(i));
+			} else{
+				boolean isPrimitive = false;
+				for (PrimitiveTypes type : PrimitiveTypes.values()) {
+			        if (firstOrderPredicate.get(i).contains(type.name().toLowerCase())) {
+			            isPrimitive = true;
+			        }
+			    }
+				if(!isPrimitive){
+					droppedTypePredicate.add(firstOrderPredicate.get(i));
+				}
 			}
 		}
+		this.firstOrderPredicate = droppedTypePredicate;
 		return droppedTypePredicate;
 	}
 	

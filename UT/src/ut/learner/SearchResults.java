@@ -3,7 +3,7 @@ package ut.learner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResuts {
+public class SearchResults {
 	
 	List<String> matchedMethods;
 	List<String> predicateList;
@@ -11,7 +11,7 @@ public class SearchResuts {
 	Boolean[] exampleType;
 	
 	
-	public SearchResuts(List<String> matchedMethods, List<String> predicateList,List<ResultInfo> searchInfo) {
+	public SearchResults(List<String> matchedMethods, List<String> predicateList,List<ResultInfo> searchInfo) {
 		super();
 		this.matchedMethods = matchedMethods;
 		this.predicateList = predicateList;

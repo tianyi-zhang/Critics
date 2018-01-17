@@ -46,7 +46,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import ut.learner.Learner;
 import ut.learner.ResultInfo;
-import ut.learner.SearchResuts;
+import ut.learner.SearchResults;
 import ut.learner.TextRangeUtil;
 import ut.seal.plugins.utils.UTFile;
 import ut.seal.plugins.utils.ast.UTASTParser;

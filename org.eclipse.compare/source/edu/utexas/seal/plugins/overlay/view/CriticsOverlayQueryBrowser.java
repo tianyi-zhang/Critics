@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 import ut.learner.Learner;
-import ut.learner.SearchResuts;
+import ut.learner.SearchResults;
 
 public class CriticsOverlayQueryBrowser extends ViewPart {
 	
